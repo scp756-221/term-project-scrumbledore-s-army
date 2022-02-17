@@ -1,10 +1,9 @@
 from flask import Flask, make_response, request
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column
-from db.config import SQLALCHEMY_DATABASE_URI
+# from db.config import SQLALCHEMY_DATABASE_URI
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI#'postgresql://hga50:12345678@restaurant-db.cj7sflyjpv0c.us-west-2.rds.amazonaws.com:5432/restaurant_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hga50:12345678@restaurant-db.cj7sflyjpv0c.us-west-2.rds.amazonaws.com:5432/restaurant_db'
 db = SQLAlchemy(app)
 
 class Order(db.Model):
@@ -18,22 +17,28 @@ class Order(db.Model):
     def __repr__(self):
         return '<User %r>' % self.user_id
 
+
 @app.route('/bill', methods=['GET'])
 def generate_bill():
     user = request.args.get('user_id')
     order = get_user_data(user)
 
     return make_response(order, 200)
+
     
-  
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
-    data = Order.query.filter_by(user_id=user).update({Order.paid: True})
-    db.session.commit()
-    order = get_user_data(user)
+    data = Order.query.filter_by(user_id=user).first()
+    if data.amount == 0:
+        return make_response("The amount value is zero. Cannot pay the bill.", 422)
+    else:
+        data = Order.query.filter_by(user_id=user).update({Order.paid: True})
+        db.session.commit()
+        order = get_user_data(user)
 
-    return make_response(order, 200)
+        return make_response(order, 200)
+
 
 def get_user_data(user):
     data = Order.query.filter_by(user_id=user).first()
@@ -44,6 +49,7 @@ def get_user_data(user):
     }
 
     return order
+    
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
