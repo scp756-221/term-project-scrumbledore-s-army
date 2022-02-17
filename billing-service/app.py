@@ -32,6 +32,8 @@ def make_payment():
     data = Order.query.filter_by(user_id=user).first()
     if data.amount == 0:
         return make_response("The amount value is zero. Cannot pay the bill.", 422)
+    elif data.paid == True:
+        return make_response("The bill has already been paid.", 409)
     else:
         data = Order.query.filter_by(user_id=user).update({Order.paid: True})
         db.session.commit()
