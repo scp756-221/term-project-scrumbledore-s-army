@@ -5,6 +5,7 @@ import requests
 class Rcli(cmd.Cmd):
     def __init__(self):
         cmd.Cmd.__init__(self)
+        self.user_id = "himank"
         self.prompt = 'rql: '
         self.intro = """
 Command-line interface to restaurant service.
@@ -52,6 +53,48 @@ Enter 'help' for command list.
             print("{0}: ${1}".format(item_name, item_price))
 
         print()
+    
+    def do_get_cheque(self, arg):
+        """
+        Get the amount to be paid for your order
+        """
+        response = requests.get(
+            "a.b.c.d/bill",
+            params={'user_id': self.user_id}
+        )
+
+        if response.status_code != 200:
+            print("Unable to fetch bill. Please retry in some time.")
+            return True
+        
+        cheque_details = response.json()
+
+        if (cheque_details['paid'] == False):
+            print("Amount to be paid: {0}".format(cheque_details["amount"]))
+        else:
+            print("Though we appreciate your generosity, you have already paid your bill!")
+        
+
+    def do_pay_bill(self, arg):
+        """
+        Pay the bill for your order
+        """
+
+        response = requests.get(
+            "a.b.c.d/pay",
+            params={'user_id': self.user_id}
+        )
+
+        if response.status_code == 422:
+            print("We do not accept charity. Please order some food in before paying for it.")  
+            return True
+        elif response.status_code != 200:
+            print("Unable to pay bill. Please retry in some time.")
+            return True
+        else:
+            print("Thankyou for your payment. Enjoy your day!")
+            return True
+        
         
     def do_quit(self, arg):
         """
