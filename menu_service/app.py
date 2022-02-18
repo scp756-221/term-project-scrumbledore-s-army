@@ -23,6 +23,8 @@ class Menu(db.Model):
         self.price = color
 
 
+
+
 @app.route('/getMenuItems')
 def get_all_menu_data():
     menu_items = Menu.query.all()
@@ -33,6 +35,64 @@ def get_all_menu_data():
             "price": m.price
         } for m in menu_items]
     return {"menu_items": results}
+
+
+
+
+class Order(db.Model):
+    _tablename_ = 'order'
+    order_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(80), nullable=True)
+    amount = db.Column(db.Integer, nullable=True)
+    paid = db.Column(db.Boolean, nullable=True)
+
+    def _init_(self, user_id, amount, paid):
+        self.user_id = user_id
+        self.amount = amount
+        self.paid = paid
+
+
+
+
+
+@app.route('/takeOrder', methods=['POST'])
+def take_order():
+
+    order = json.loads(request.data)
+    user_id = order['user_id']
+    order_list = order['order_list']    
+    
+    total_price=0
+    for order_obj in order_list:
+        # {
+        #     "id": 1,
+        #     "name": "aa",
+        #     "price": 12.0,
+        #     "qty": 1
+        # },
+        price = order_obj['price']
+        qty = order_obj['qty']
+        total_price += (price * qty)
+    # print(order)
+
+    _order_db = Order(user_id = user_id,
+                    amount = total_price,
+                    paid = False)
+
+    db.session.add(_order_db)   
+    db.session.commit()
+
+
+    order_success = {
+        "status": True,
+        "message": "Order accepted",
+        "total_amount": total_price
+    }
+    return jsonify(order_success)
+
+
+
+
 
 if __name__ == '__main__':
     db.create_all()
