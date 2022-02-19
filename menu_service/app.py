@@ -53,5 +53,4 @@ def take_order():
     return jsonify(order_success)
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    app.run(port=5001, debug=True)
