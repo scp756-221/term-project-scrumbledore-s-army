@@ -11,5 +11,4 @@ class Order(db.Model):
     paid = db.Column(db.Boolean)
 
     def __repr__(self):
-        return '<User %r>' % self.user_id
-        
+        return '<User %r>' % self.user_id 
