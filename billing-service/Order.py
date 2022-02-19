@@ -12,3 +12,4 @@ class Order(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.user_id
+        
