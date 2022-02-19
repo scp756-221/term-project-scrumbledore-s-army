@@ -128,7 +128,7 @@ Enter 'help' for command list.
         cheque_details = response.json()
 
         if (cheque_details['paid'] == False):
-            print("Amount to be paid: {0}".format(cheque_details["amount"]))
+            print("Amount to be paid: ${0}".format(cheque_details["amount"]))
         else:
             print("Though we appreciate your generosity, you have already paid your bill!")
 
