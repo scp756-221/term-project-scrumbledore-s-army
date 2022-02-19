@@ -31,6 +31,9 @@ def parse_args():
 
     return argp.parse_args()
 
+def get_url(name, port, endpoint):
+    return "http://{}:{}/{}".format(name, port, endpoint)
+
 
 class Rcli(cmd.Cmd):
     def __init__(self, args):
@@ -52,24 +55,14 @@ Enter 'help' for command list.
         """
         Get the entire menu
         """
-        ## Uncomment below 
+        response = requests.get(
+            get_url(self.name_menu, self.port_name, 'getMenuItems')
+        )
 
-        # response = requests.get(
-        #     "A.B.C.D"
-        # )
-
-        # if response.status_code != 200:
-        #     print("Unable to get menu. Please retry in some time.")
+        if response.status_code != 200:
+            print("Unable to get menu. Please retry in some time.")
         
-        # menu_items = response.json()
-
-        ## ----------------------------------------------
-
-
-        #remove this line
-        dummy_data = open('./rcli/dummy.json')
-        menu_items = json.load(dummy_data)
-        # remove above line
+        menu_items = response.json()
 
         print()
         print("######## MENU ########")
@@ -102,14 +95,17 @@ Enter 'help' for command list.
             order_dict[item_array[0]] = int(item_array[1])
 
         json_object = json.dumps(order_dict, indent = 4) 
-        print(json_object)
+        
+        response = requests.post(
+            get_url(self.name_menu, self.port_name, 'takeOrder')
+        )
 
     def do_get_cheque(self, arg):
         """
         Get the amount to be paid for your order
         """
         response = requests.get(
-            "http://127.0.0.1:5000/bill",
+            get_url(self.name_bill, self.port_bill, 'bill'),
             params={'user_id': self.user_id}
         )
 
@@ -129,7 +125,7 @@ Enter 'help' for command list.
         """
 
         response = requests.get(
-            "http://127.0.0.1:5000/pay",
+            get_url(self.name_bill, self.port_bill, 'pay'),
             params={'user_id': self.user_id}
         )
 
