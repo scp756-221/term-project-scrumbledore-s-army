@@ -1,6 +1,9 @@
 from flask import make_response, request
 from Order import Order
 from db.config import app
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy(app)
 
 @app.route('/bill', methods=['GET'])
 def generate_bill():
