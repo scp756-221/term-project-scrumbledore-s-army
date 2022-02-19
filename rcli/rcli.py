@@ -1,10 +1,43 @@
+import argparse
 import cmd
 import json
 import requests
 
+def parse_args():
+    argp = argparse.ArgumentParser(
+        'rcli',
+        description='Command-line query interface to restaurant service'
+        )
+    argp.add_argument(
+        'name_menu',
+        help="IP address of menu server"
+        )
+    argp.add_argument(
+        'port_menu',
+        type=int,
+        help="Port number of menu server"
+        )
+    argp.add_argument(
+        'name_bill',
+        help="IP address of billing server"
+        )
+    argp.add_argument(
+        'port_bill',
+        type=int,
+        help="Port number of billing server"
+        )
+
+    return argp.parse_args()
+
+
 class Rcli(cmd.Cmd):
-    def __init__(self):
+    def __init__(self, args):
         cmd.Cmd.__init__(self)
+        self.name_bill = args.name_bill
+        self.name_menu = args.name_menu
+        self.port_bill = args.port_bill
+        self.port_name = args.port_menu
+        
         self.user_id = "anchal"
         self.prompt = 'rql: '
         self.intro = """
@@ -86,7 +119,7 @@ Enter 'help' for command list.
 
         if response.status_code == 422:
             print("We do not accept charity. Please order some food in before paying for it.")  
-        elif response.status_code == 422:
+        elif response.status_code == 409:
             print("Though we appreciate your generosity, you have already paid your bill!")  
         elif response.status_code != 200:
             print("Unable to pay bill. Please retry in some time.")
@@ -103,4 +136,5 @@ Enter 'help' for command list.
 
 
 if __name__ == '__main__':
-    Rcli().cmdloop()
+    args = parse_args()
+    Rcli(args).cmdloop()
