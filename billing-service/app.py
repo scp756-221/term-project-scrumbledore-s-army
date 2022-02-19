@@ -1,7 +1,10 @@
 from flask import make_response, request
 from Order import Order
 from db.config import app
+from flask_sqlalchemy import SQLAlchemy
 import argparse
+
+db = SQLAlchemy(app)
 
 def parse_args():
     argp = argparse.ArgumentParser(

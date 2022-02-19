@@ -5,8 +5,21 @@ import json
 from menu import Menu 
 from order import Order   
 from db.config import app
+import argparse
 
 db = SQLAlchemy(app)
+
+def parse_args():
+    argp = argparse.ArgumentParser(
+        'Menu-service'
+        )
+    argp.add_argument(
+        'port_menu',
+        type=int,
+        help="Port number of menu server"
+        )
+
+    return argp.parse_args()
 
 @app.route('/getMenuItems')
 def get_all_menu_data():
@@ -22,7 +35,7 @@ def get_all_menu_data():
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
 
-    order = json.loads(request.data)
+    order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']    
     
@@ -47,5 +60,6 @@ def take_order():
     return jsonify(order_success)
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    args = parse_args()
+    app.run(port=args.port_menu, debug=True)
+    
