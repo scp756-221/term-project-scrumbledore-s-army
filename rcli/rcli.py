@@ -88,17 +88,24 @@ Enter 'help' for command list.
         """
         food = arg.split(";")
         
-        order_dict = {}
+        order_list = []
         for item in food:
+            order_details = {}
             item = item.strip()
             item_array  = item.split(" ")
-            order_dict[item_array[0]] = int(item_array[1])
+            order_details['id'] = int(item_array[0])
+            order_details['qty'] = int(item_array[1])
+            order_list.append(order_details)
 
-        json_object = json.dumps(order_dict, indent = 4) 
-        
-        response = requests.post(
-            get_url(self.name_menu, self.port_name, 'takeOrder')
-        )
+        payload = {}
+        payload['user_id'] = self.user_id
+        payload['order_list'] = order_list
+
+        payload = json.dumps(payload, indent = 4) 
+        print(payload)
+        # response = requests.post(
+        #     get_url(self.name_menu, self.port_name, 'takeOrder')
+        # )
 
     def do_get_cheque(self, arg):
         """
