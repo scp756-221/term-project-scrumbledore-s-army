@@ -22,7 +22,7 @@ def get_all_menu_data():
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
 
-    order = json.loads(request.data)
+    order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']    
     
@@ -47,5 +47,4 @@ def take_order():
     return jsonify(order_success)
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    app.run(port=5001, debug=True)

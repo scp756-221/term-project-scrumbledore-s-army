@@ -70,7 +70,7 @@ Enter 'help' for command list.
         for item in menu_items["menu_items"]:
             item_name = item["name"]
             item_price = item["price"]
-            item_id = item["id"]
+            item_id = item["mid"]
             
             item_name_parts = item_name.split("_")
             item_name_parts = [i.capitalize() for i in item_name_parts]
