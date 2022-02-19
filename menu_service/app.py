@@ -4,15 +4,9 @@ from flask import jsonify
 import json
 from menu import Menu 
 from order import Order   
-from db.config import SQLALCHEMY_DATABASE_URI
-
-app = Flask(__name__)
+from db.config import app
 
 db = SQLAlchemy(app)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = 'secret string'
 
 @app.route('/getMenuItems')
 def get_all_menu_data():
