@@ -67,7 +67,7 @@ Enter 'help' for command list.
         print()
         print("######## MENU ########")
 
-        for item in menu_items["items"]:
+        for item in menu_items["menu_items"]:
             item_name = item["name"]
             item_price = item["price"]
             item_id = item["id"]
@@ -102,10 +102,16 @@ Enter 'help' for command list.
         payload['order_list'] = order_list
 
         payload = json.dumps(payload, indent = 4) 
-        print(payload)
-        # response = requests.post(
-        #     get_url(self.name_menu, self.port_name, 'takeOrder')
-        # )
+        
+        response = requests.post(
+            get_url(self.name_menu, self.port_name, 'takeOrder'),
+            json=payload
+        )
+
+        if (response.status_code != 200):
+            print("Unable to place order. Please try again!")
+        else:
+            print("Order placed successfully! Enjoy your meal!!")
 
     def do_get_cheque(self, arg):
         """
