@@ -2,6 +2,8 @@ import argparse
 import cmd
 import json
 import requests
+from datetime import datetime
+from uuid import uuid4
 
 def parse_args():
     argp = argparse.ArgumentParser(
@@ -37,8 +39,8 @@ class Rcli(cmd.Cmd):
         self.name_menu = args.name_menu
         self.port_bill = args.port_bill
         self.port_name = args.port_menu
+        self.user_id = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(uuid4())
         
-        self.user_id = "anchal"
         self.prompt = 'rql: '
         self.intro = """
 Command-line interface to restaurant service.
@@ -87,6 +89,21 @@ Enter 'help' for command list.
 
         print()
     
+    def do_order(self, arg):
+        """
+        Placing order
+        """
+        food = arg.split(";")
+        
+        order_dict = {}
+        for item in food:
+            item = item.strip()
+            item_array  = item.split(" ")
+            order_dict[item_array[0]] = int(item_array[1])
+
+        json_object = json.dumps(order_dict, indent = 4) 
+        print(json_object)
+
     def do_get_cheque(self, arg):
         """
         Get the amount to be paid for your order
@@ -105,7 +122,6 @@ Enter 'help' for command list.
             print("Amount to be paid: {0}".format(cheque_details["amount"]))
         else:
             print("Though we appreciate your generosity, you have already paid your bill!")
-        
 
     def do_pay_bill(self, arg):
         """
@@ -125,15 +141,13 @@ Enter 'help' for command list.
             print("Unable to pay bill. Please retry in some time.")
         else:
             print("Thankyou for your payment. Enjoy your day!")
-        
-        
+             
     def do_quit(self, arg):
         """
         Quit the program.
         """
         return True
         
-
 
 if __name__ == '__main__':
     args = parse_args()
