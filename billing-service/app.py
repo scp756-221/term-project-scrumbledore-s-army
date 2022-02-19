@@ -1,6 +1,19 @@
 from flask import make_response, request
 from Order import Order
 from db.config import app
+import argparse
+
+def parse_args():
+    argp = argparse.ArgumentParser(
+        'Billing-service'
+        )
+    argp.add_argument(
+        'port_bill',
+        type=int,
+        help="Port number of billing server"
+        )
+
+    return argp.parse_args()
 
 @app.route('/bill', methods=['GET'])
 def generate_bill():
@@ -36,4 +49,5 @@ def get_user_data(user):
     return order
     
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    args = parse_args()
+    app.run(port=args.port_bill, debug=True)
