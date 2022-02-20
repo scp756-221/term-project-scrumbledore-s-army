@@ -42,6 +42,8 @@ def make_payment():
         return make_response("The bill has already been paid.", 409)
     else:
         data = Order.query.filter_by(user_id=user).first()
+        if data == None:
+            return create_user_error()
         data.paid = True
         Order.db.session.commit()
         order = get_user_data(user)
@@ -67,5 +69,5 @@ def create_user_error():
     
 if __name__ == '__main__':
     args = parse_args()
-    app.run(port=args.port_bill, debug=True)
+    app.run(host='0.0.0.0', port=args.port_bill, debug=True)
     
