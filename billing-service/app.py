@@ -23,9 +23,11 @@ def parse_args():
 def generate_bill():
     user = request.args.get('user_id')
     order = get_user_data(user)
-    
-    return make_response(order, 200)
-    
+    if order == None:
+        return create_user_error()
+    else:
+        return make_response(order, 200)
+        
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
@@ -37,14 +39,20 @@ def make_payment():
         return make_response("The bill has already been paid.", 409)
     else:
         data = Order.query.filter_by(user_id=user).first()
+        if data == None:
+            return create_user_error()
         data.paid = True
         Order.db.session.commit()
         order = get_user_data(user)
-
-        return make_response(order, 200)
+        if order == None:
+            return create_user_error()
+        else:
+            return make_response(order, 200)
 
 def get_user_data(user):
     data = Order.query.filter_by(user_id=user).first()
+    if data == None:
+        return None
     order = {
         "user_id":data.user_id,
         "amount":data.amount,
@@ -52,6 +60,9 @@ def get_user_data(user):
     }
 
     return order
+
+def create_user_error():
+    return make_response("Invalid user.", 422)
     
 if __name__ == '__main__':
     args = parse_args()
