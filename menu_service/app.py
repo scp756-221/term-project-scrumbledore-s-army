@@ -21,11 +21,6 @@ def parse_args():
 
     return argp.parse_args()
 
-@app.route('/getMenuItems')
-def get_all_menu_data():
-    return get_menu_data()
-
-
 def get_menu_data():
     menu_items = Menu.query.all()
     results = [
@@ -50,8 +45,8 @@ def take_order():
     total_price=0
     
     for selected_o in order_list:
+        item_found = False
         for res_o in menu_data["menu_items"]:
-            item_found = False
             if int(selected_o['id']) == int(res_o['mid']):
                 item_found = True
                 qty = selected_o['qty']
