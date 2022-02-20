@@ -23,6 +23,10 @@ def parse_args():
 
 @app.route('/getMenuItems')
 def get_all_menu_data():
+    return get_menu_data()
+
+
+def get_menu_data():
     menu_items = Menu.query.all()
     results = [
         {
@@ -34,16 +38,18 @@ def get_all_menu_data():
 
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
-
-    order = json.loads(json.loads(request.data))
+    res_data = get_menu_data()
+    order = json.loads(request.data)
     user_id = order['user_id']
     order_list = order['order_list']    
     
     total_price=0
-    for order_obj in order_list:
-        price = order_obj['price']
-        qty = order_obj['qty']
-        total_price += (price * qty)
+    for selected_o in order_list:
+        for res_o in res_data["menu_items"]:
+            if int(selected_o['id']) == int(res_o['mid']):
+                qty = selected_o['qty']
+                price = res_o['price']
+                total_price += (price * qty)
 
     _order_db = Order(user_id = user_id,
                     amount = total_price,

@@ -2,6 +2,7 @@ from flask import make_response, request
 from Order import Order
 from db.config import app
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import update
 import argparse
 
 db = SQLAlchemy(app)
@@ -35,8 +36,9 @@ def make_payment():
     elif data.paid == True:
         return make_response("The bill has already been paid.", 409)
     else:
-        data = Order.query.filter_by(user_id=user).update({Order.paid: True})
-        db.session.commit()
+        data = Order.query.filter_by(user_id=user).first()
+        data.paid = True
+        Order.db.session.commit()
         order = get_user_data(user)
 
         return make_response(order, 200)

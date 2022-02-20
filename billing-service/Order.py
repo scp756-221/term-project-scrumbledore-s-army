@@ -10,5 +10,7 @@ class Order(db.Model):
     amount = db.Column(db.Integer)
     paid = db.Column(db.Boolean)
 
+    db = db
+
     def __repr__(self):
         return '<User %r>' % self.user_id 
