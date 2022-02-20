@@ -33,14 +33,15 @@ def make_payment():
     user = request.args.get('user_id')
     data = Order.query.filter_by(user_id=user).first()
     
+    if data == None:
+        return create_user_error()
+    
     if data.amount == 0:
         return make_response("The amount value is zero. Cannot pay the bill.", 422)
     elif data.paid == True:
         return make_response("The bill has already been paid.", 409)
     else:
         data = Order.query.filter_by(user_id=user).first()
-        if data == None:
-            return create_user_error()
         data.paid = True
         Order.db.session.commit()
         order = get_user_data(user)

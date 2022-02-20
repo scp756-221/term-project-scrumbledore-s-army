@@ -107,8 +107,10 @@ Enter 'help' for command list.
             get_url(self.name_menu, self.port_name, 'takeOrder'),
             json=payload
         )
-
-        if (response.status_code != 200):
+        
+        if response.status_code == 422:
+            print("Incorrect menu items. Please be careful while ordering.")  
+        elif (response.status_code != 200):
             print("Unable to place order. Please try again!")
         else:
             print("Order placed successfully! Enjoy your meal!!")
@@ -122,15 +124,17 @@ Enter 'help' for command list.
             params={'user_id': self.user_id}
         )
 
-        if response.status_code != 200:
+        if response.status_code == 422:
+            print("We do not accept charity. Please order some food before paying for it.")  
+        elif response.status_code != 200:
             print("Unable to fetch bill. Please retry in some time.")
-        
-        cheque_details = response.json()
-
-        if (cheque_details['paid'] == False):
-            print("Amount to be paid: {0}".format(cheque_details["amount"]))
         else:
-            print("Though we appreciate your generosity, you have already paid your bill!")
+            cheque_details = response.json()
+
+            if (cheque_details['paid'] == False):
+                print("Amount to be paid: ${0}".format(cheque_details["amount"]))
+            else:
+                print("Though we appreciate your generosity, you have already paid your bill!")
 
     def do_pay_bill(self, arg):
         """
@@ -141,7 +145,7 @@ Enter 'help' for command list.
             get_url(self.name_bill, self.port_bill, 'pay'),
             params={'user_id': self.user_id}
         )
-
+        
         if response.status_code == 422:
             print("We do not accept charity. Please order some food in before paying for it.")  
         elif response.status_code == 409:
