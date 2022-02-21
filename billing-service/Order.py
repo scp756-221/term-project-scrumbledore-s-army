@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+
 from db.config import app
 
 db = SQLAlchemy(app)

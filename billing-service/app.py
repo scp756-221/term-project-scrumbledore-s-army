@@ -1,9 +1,10 @@
-from flask import make_response, request
-from Order import Order
-from db.config import app
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import update
 import argparse
+
+from flask import make_response, request
+from flask_sqlalchemy import SQLAlchemy
+
+from db.config import app
+from Order import Order
 
 db = SQLAlchemy(app)
 

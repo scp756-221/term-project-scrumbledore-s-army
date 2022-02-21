@@ -1,11 +1,12 @@
-from flask import Flask, make_response, render_template, request, flash
-from flask_sqlalchemy import SQLAlchemy
-from flask import jsonify
+import argparse
 import json
+
+from flask import jsonify, make_response, request
+from flask_sqlalchemy import SQLAlchemy
+
+from db.config import app
 from menu import Menu
 from order import Order
-from db.config import app
-import argparse
 
 db = SQLAlchemy(app)
 

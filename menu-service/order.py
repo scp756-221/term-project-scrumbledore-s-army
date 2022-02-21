@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask import jsonify
-import json
+
 from db.config import app
 
 db = SQLAlchemy(app)
