@@ -1,7 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
+
 from db.config import app
 
 db = SQLAlchemy(app)
+
 
 class Order(db.Model):
     __tablename__ = 'order'
@@ -13,4 +15,4 @@ class Order(db.Model):
     db = db
 
     def __repr__(self):
-        return '<User %r>' % self.user_id 
+        return '<User %r>' % self.user_id
