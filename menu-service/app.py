@@ -2,48 +2,45 @@ from flask import Flask, make_response, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
 import json
-from menu import Menu 
-from order import Order   
+from menu import Menu
+from order import Order
 from db.config import app
 import argparse
 
 db = SQLAlchemy(app)
 
+
 def parse_args():
-    argp = argparse.ArgumentParser(
-        'Menu-service'
-        )
-    argp.add_argument(
-        'port_menu',
-        type=int,
-        help="Port number of menu server"
-        )
+    argp = argparse.ArgumentParser('Menu-service')
+    argp.add_argument('port_menu', type=int, help="Port number of menu server")
 
     return argp.parse_args()
 
+
 def get_menu_data():
     menu_items = Menu.query.all()
-    results = [
-        {
-            "mid": m.m_id,
-            "name": m.name,
-            "price": m.price
-        } for m in menu_items]
+    results = [{
+        "mid": m.m_id,
+        "name": m.name,
+        "price": m.price
+    } for m in menu_items]
     return {"menu_items": results}
-    
+
+
 @app.route('/getMenuItems')
 def get_all_menu_data():
     return get_menu_data()
+
 
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
     menu_data = get_menu_data()
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
-    order_list = order['order_list']    
-    
-    total_price=0
-    
+    order_list = order['order_list']
+
+    total_price = 0
+
     for selected_o in order_list:
         item_found = False
         for res_o in menu_data["menu_items"]:
@@ -52,20 +49,15 @@ def take_order():
                 qty = selected_o['qty']
                 price = res_o['price']
                 total_price += (price * qty)
-        
+
         if item_found == False:
-            order_failure = {
-                    "status": False,
-                    "message": "Order Declined"
-                }
+            order_failure = {"status": False, "message": "Order Declined"}
 
             return make_response(jsonify(order_failure), 422)
 
-    _order_db = Order(user_id = user_id,
-                    amount = total_price,
-                    paid = False)
+    _order_db = Order(user_id=user_id, amount=total_price, paid=False)
 
-    db.session.add(_order_db)   
+    db.session.add(_order_db)
     db.session.commit()
 
     order_success = {
@@ -76,7 +68,7 @@ def take_order():
 
     return jsonify(order_success)
 
+
 if __name__ == '__main__':
     args = parse_args()
     app.run(port=args.port_menu, debug=True)
-    

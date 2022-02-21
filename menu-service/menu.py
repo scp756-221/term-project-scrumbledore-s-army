@@ -6,6 +6,7 @@ from db.config import app
 
 db = SQLAlchemy(app)
 
+
 class Menu(db.Model):
     _tablename_ = 'menu'
     m_id = db.Column(db.Integer, primary_key=True)
@@ -15,4 +16,3 @@ class Menu(db.Model):
     def _init_(self, pname, color):
         self.name = pname
         self.price = color
-

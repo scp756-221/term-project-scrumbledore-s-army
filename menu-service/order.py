@@ -6,6 +6,7 @@ from db.config import app
 
 db = SQLAlchemy(app)
 
+
 class Order(db.Model):
     _tablename_ = 'order'
     order_id = db.Column(db.Integer, primary_key=True)
