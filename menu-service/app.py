@@ -6,8 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 import db.dynamodb_handler as dynamodb
 from db.config import app
-from menu import Menu
-from order import Order
 
 db = SQLAlchemy(app)
 
@@ -36,7 +34,7 @@ def take_order():
     for selected_o in order_list:
         item_found = False
         for res_o in menu_data["menu_items"]:
-            if int(selected_o['id']) == int(res_o['mid']):
+            if int(selected_o['id']) == int(res_o['m_id']):
                 item_found = True
                 qty = selected_o['qty']
                 price = res_o['price']
@@ -47,18 +45,7 @@ def take_order():
 
             return make_response(jsonify(order_failure), 422)
 
-    _order_db = Order(user_id=user_id, amount=total_price, paid=False)
-
-    db.session.add(_order_db)
-    db.session.commit()
-
-    order_success = {
-        "status": True,
-        "message": "Order accepted",
-        "total_amount": total_price
-    }
-
-    return jsonify(order_success)
+    return dynamodb.add_order(user_id, total_price, False)
 
 
 if __name__ == '__main__':

@@ -53,14 +53,14 @@ Enter 'help' for command list.
             print("Unable to get menu. Please retry in some time.")
 
         menu_items = response.json()
-
+        
         print()
         print("######## MENU ########")
 
         for item in menu_items["menu_items"]:
             item_name = item["name"]
             item_price = item["price"]
-            item_id = item["mid"]
+            item_id = item["m_id"]
 
             item_name_parts = item_name.split("_")
             item_name_parts = [i.capitalize() for i in item_name_parts]
