@@ -4,6 +4,7 @@ import json
 from flask import jsonify, make_response, request
 from flask_sqlalchemy import SQLAlchemy
 
+import db.dynamodb_handler as dynamodb
 from db.config import app
 from menu import Menu
 from order import Order
@@ -18,24 +19,14 @@ def parse_args():
     return argp.parse_args()
 
 
-def get_menu_data():
-    menu_items = Menu.query.all()
-    results = [{
-        "mid": m.m_id,
-        "name": m.name,
-        "price": m.price
-    } for m in menu_items]
-    return {"menu_items": results}
-
-
 @app.route('/getMenuItems')
 def get_all_menu_data():
-    return get_menu_data()
+    return dynamodb.get_menu()
 
 
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
-    menu_data = get_menu_data()
+    menu_data = dynamodb.get_menu()
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']
