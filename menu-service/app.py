@@ -1,13 +1,11 @@
 import argparse
 import json
 
-from flask import jsonify, make_response, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, make_response, request
 
 import db.dynamodb_handler as dynamodb
-from db.config import app
 
-db = SQLAlchemy(app)
+app = Flask(__name__)
 
 
 def parse_args():
