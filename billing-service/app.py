@@ -1,10 +1,11 @@
 import argparse
+from urllib import response
 
 from flask import make_response, request
 from flask_sqlalchemy import SQLAlchemy
 
 from db.config import app
-from Order import Order
+import db.dynamodb_handler as dynamodb
 
 db = SQLAlchemy(app)
 
@@ -21,46 +22,49 @@ def parse_args():
 @app.route('/bill', methods=['GET'])
 def generate_bill():
     user = request.args.get('user_id')
-    order = get_user_data(user)
-    if order == None:
+    response = dynamodb.get_user_data(user)
+    
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Item' in response):
+            return make_response(response["Item"], 200)
+
         return create_user_error()
-    else:
-        return make_response(order, 200)
+
+    return create_user_error()
 
 
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
-    data = Order.query.filter_by(user_id=user).first()
+    response = dynamodb.get_user_data(user)
 
-    if data == None:
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Item' in response):
+            data = response['Item']
+            
+            if data["amount"] == 0:
+                return make_response("The amount value is zero. Cannot pay the bill.",
+                                    422)
+            elif data["paid"] == True:
+                return make_response("The bill has already been paid.", 409)
+            
+            else:
+                update_response = dynamodb.pay_bill(user)
+                if (update_response['ResponseMetadata']['HTTPStatusCode'] == 200):
+                    return {
+                        'msg'                : 'Paid successfully',
+                        'ModifiedAttributes' : update_response['Attributes'],
+                        'response'           : update_response['ResponseMetadata']
+                    }
+
+                return {
+                    'msg'      : 'Some error occured',
+                    'response' : update_response
+                } 
+
         return create_user_error()
 
-    if data.amount == 0:
-        return make_response("The amount value is zero. Cannot pay the bill.",
-                             422)
-    elif data.paid == True:
-        return make_response("The bill has already been paid.", 409)
-    else:
-        data = Order.query.filter_by(user_id=user).first()
-        if data == None:
-            return create_user_error()
-        data.paid = True
-        Order.db.session.commit()
-        order = get_user_data(user)
-        if order == None:
-            return create_user_error()
-        else:
-            return make_response(order, 200)
-
-
-def get_user_data(user):
-    data = Order.query.filter_by(user_id=user).first()
-    if data == None:
-        return None
-    order = {"user_id": data.user_id, "amount": data.amount, "paid": data.paid}
-
-    return order
+    return create_user_error()
 
 
 def create_user_error():
