@@ -1,14 +1,11 @@
 import argparse
 import json
 
-from flask import jsonify, make_response, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, make_response, request
 
-from db.config import app
-from menu import Menu
-from order import Order
+import db.dynamodb_handler as dynamodb
 
-db = SQLAlchemy(app)
+app = Flask(__name__)
 
 
 def parse_args():
@@ -18,24 +15,14 @@ def parse_args():
     return argp.parse_args()
 
 
-def get_menu_data():
-    menu_items = Menu.query.all()
-    results = [{
-        "mid": m.m_id,
-        "name": m.name,
-        "price": m.price
-    } for m in menu_items]
-    return {"menu_items": results}
-
-
 @app.route('/getMenuItems')
 def get_all_menu_data():
-    return get_menu_data()
+    return dynamodb.get_menu()
 
 
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
-    menu_data = get_menu_data()
+    menu_data = dynamodb.get_menu()
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']
@@ -45,7 +32,7 @@ def take_order():
     for selected_o in order_list:
         item_found = False
         for res_o in menu_data["menu_items"]:
-            if int(selected_o['id']) == int(res_o['mid']):
+            if int(selected_o['id']) == int(res_o['m_id']):
                 item_found = True
                 qty = selected_o['qty']
                 price = res_o['price']
@@ -56,18 +43,7 @@ def take_order():
 
             return make_response(jsonify(order_failure), 422)
 
-    _order_db = Order(user_id=user_id, amount=total_price, paid=False)
-
-    db.session.add(_order_db)
-    db.session.commit()
-
-    order_success = {
-        "status": True,
-        "message": "Order accepted",
-        "total_amount": total_price
-    }
-
-    return jsonify(order_success)
+    return dynamodb.add_order(user_id, total_price, False)
 
 
 if __name__ == '__main__':
