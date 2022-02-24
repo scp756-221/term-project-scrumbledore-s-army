@@ -1,13 +1,10 @@
 import argparse
-from urllib import response
 
-from flask import make_response, request
-from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, make_response, request
 
-from db.config import app
 import db.dynamodb_handler as dynamodb
 
-db = SQLAlchemy(app)
+app = Flask(__name__)
 
 
 def parse_args():
@@ -23,7 +20,7 @@ def parse_args():
 def generate_bill():
     user = request.args.get('user_id')
     response = dynamodb.get_user_data(user)
-    
+
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         if ('Item' in response):
             return make_response(response["Item"], 200)
@@ -41,26 +38,27 @@ def make_payment():
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         if ('Item' in response):
             data = response['Item']
-            
+
             if data["amount"] == 0:
-                return make_response("The amount value is zero. Cannot pay the bill.",
-                                    422)
+                return make_response(
+                    "The amount value is zero. Cannot pay the bill.", 422)
             elif data["paid"] == True:
                 return make_response("The bill has already been paid.", 409)
-            
+
             else:
                 update_response = dynamodb.pay_bill(user)
-                if (update_response['ResponseMetadata']['HTTPStatusCode'] == 200):
+                if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
+                        200):
                     return {
-                        'msg'                : 'Paid successfully',
-                        'ModifiedAttributes' : update_response['Attributes'],
-                        'response'           : update_response['ResponseMetadata']
+                        'msg': 'Paid successfully',
+                        'ModifiedAttributes': update_response['Attributes'],
+                        'response': update_response['ResponseMetadata']
                     }
 
                 return {
-                    'msg'      : 'Some error occured',
-                    'response' : update_response
-                } 
+                    'msg': 'Some error occured',
+                    'response': update_response
+                }
 
         return create_user_error()
 
