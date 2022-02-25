@@ -4,7 +4,7 @@
       { "AttributeName": "user_id", "KeyType": "HASH" }
     ],
     "AttributeDefinitions": [
-      { "AttributeName": "user_id", "AttributeType": "N" }
+      { "AttributeName": "user_id", "AttributeType": "S" }
     ],
     "ProvisionedThroughput": {
       "ReadCapacityUnits": 5,
