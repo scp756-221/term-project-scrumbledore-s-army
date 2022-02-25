@@ -48,4 +48,4 @@ def take_order():
 
 if __name__ == '__main__':
     args = parse_args()
-    app.run(port=args.port_menu, debug=True)
+    app.run(host='0.0.0.0', port=args.port_menu, debug=True)
