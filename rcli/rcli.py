@@ -26,6 +26,7 @@ def get_url(name, port, endpoint):
 
 
 class Rcli(cmd.Cmd):
+
     def __init__(self, args):
         cmd.Cmd.__init__(self)
         self.name_bill = args.name_bill
@@ -53,9 +54,11 @@ Enter 'help' for command list.
             print("Unable to get menu. Please retry in some time.")
 
         menu_items = response.json()
-        
+
         print()
         print("######## MENU ########")
+
+        menu_dict = {}
 
         for item in menu_items["menu_items"]:
             item_name = item["name"]
@@ -66,11 +69,20 @@ Enter 'help' for command list.
             item_name_parts = [i.capitalize() for i in item_name_parts]
             item_name = ' '.join(item_name_parts)
 
-            print()
-            print("Item Id: {0}".format(item_id))
-            print("{0}: ${1}".format(item_name, item_price))
+            item_id = int(item_id)
+            sum = item_name + ':' + ' $' + item_price
+            menu_dict.update({item_id: sum})
 
         print()
+
+        dictionary_items = menu_dict.items()
+        sorted_items = sorted(dictionary_items)
+
+        for i in range(0, len(sorted_items)):
+            print("Item Id:", sorted_items[i][0])
+            print(sorted_items[i][1])
+
+            print()
 
     def do_order(self, arg):
         """
