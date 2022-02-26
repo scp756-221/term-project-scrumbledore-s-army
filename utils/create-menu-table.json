@@ -1,0 +1,13 @@
+{
+    "TableName": "menu",
+    "KeySchema": [
+      { "AttributeName": "m_id", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "m_id", "AttributeType": "N" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+}

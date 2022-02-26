@@ -1,0 +1,94 @@
+{
+  "menu": [
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "1"
+          },
+          "name": {
+            "S": "naan"
+          },
+          "price": {
+            "N": "3"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "2"
+          },
+          "name": {
+            "S": "butter_chicken"
+          },
+          "price": {
+            "N": "12"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "3"
+          },
+          "name": {
+            "S": "shahi_paneer"
+          },
+          "price": {
+            "N": "15"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "4"
+          },
+          "name": {
+            "S": "afghani_chicken"
+          },
+          "price": {
+            "N": "10"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "5"
+          },
+          "name": {
+            "S": "masala_dosa"
+          },
+          "price": {
+            "N": "5"
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "m_id": {
+            "N": "6"
+          },
+          "name": {
+            "S": "chicken_biryani"
+          },
+          "price": {
+            "N": "14"
+          }
+        }
+      }
+    }
+  ]
+}

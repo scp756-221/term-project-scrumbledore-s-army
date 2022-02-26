@@ -1,59 +1,74 @@
-from flask import make_response, request
-from Order import Order
-from db.config import app
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import update
 import argparse
 
-db = SQLAlchemy(app)
+from flask import Flask, make_response, request
+
+import db.dynamodb_handler as dynamodb
+
+app = Flask(__name__)
+
 
 def parse_args():
-    argp = argparse.ArgumentParser(
-        'Billing-service'
-        )
-    argp.add_argument(
-        'port_bill',
-        type=int,
-        help="Port number of billing server"
-        )
+    argp = argparse.ArgumentParser('Billing-service')
+    argp.add_argument('port_bill',
+                      type=int,
+                      help="Port number of billing server")
 
     return argp.parse_args()
+
 
 @app.route('/bill', methods=['GET'])
 def generate_bill():
     user = request.args.get('user_id')
-    order = get_user_data(user)
-    
-    return make_response(order, 200)
-    
+    response = dynamodb.get_user_data(user)
+
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Item' in response):
+            return make_response(response["Item"], 200)
+
+        return create_user_error()
+
+    return create_user_error()
+
+
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
-    data = Order.query.filter_by(user_id=user).first()
-    
-    if data.amount == 0:
-        return make_response("The amount value is zero. Cannot pay the bill.", 422)
-    elif data.paid == True:
-        return make_response("The bill has already been paid.", 409)
-    else:
-        data = Order.query.filter_by(user_id=user).first()
-        data.paid = True
-        Order.db.session.commit()
-        order = get_user_data(user)
+    response = dynamodb.get_user_data(user)
 
-        return make_response(order, 200)
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Item' in response):
+            data = response['Item']
 
-def get_user_data(user):
-    data = Order.query.filter_by(user_id=user).first()
-    order = {
-        "user_id":data.user_id,
-        "amount":data.amount,
-        "paid":data.paid
-    }
+            if data["amount"] == 0:
+                return make_response(
+                    "The amount value is zero. Cannot pay the bill.", 422)
+            elif data["paid"] == True:
+                return make_response("The bill has already been paid.", 409)
 
-    return order
-    
+            else:
+                update_response = dynamodb.pay_bill(user)
+                if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
+                        200):
+                    return {
+                        'msg': 'Paid successfully',
+                        'ModifiedAttributes': update_response['Attributes'],
+                        'response': update_response['ResponseMetadata']
+                    }
+
+                return {
+                    'msg': 'Some error occured',
+                    'response': update_response
+                }
+
+        return create_user_error()
+
+    return create_user_error()
+
+
+def create_user_error():
+    return make_response("Invalid user.", 422)
+
+
 if __name__ == '__main__':
     args = parse_args()
-    app.run(port=args.port_bill, debug=True)
-    
+    app.run(host='0.0.0.0', port=args.port_bill, debug=True)
