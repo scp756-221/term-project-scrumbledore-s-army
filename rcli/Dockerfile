@@ -1,15 +1,14 @@
 FROM python:3.7
 
-RUN mkdir /mcli-image
+RUN mkdir /rcli-image
 
-COPY . /mcli-image/
+COPY ./rcli /rcli-image/
+COPY requirements.txt /rcli-image/
 
-WORKDIR /mcli-image
+WORKDIR /rcli-image
 
 RUN pip install -r requirements.txt
 
-COPY rcli.py .
-
 ENTRYPOINT ["python", "rcli.py"]
 
-CMD [ "0.0.0.0", "3001", "0.0.0.0", "3000"]
+CMD [ "0.0.0.0", "30001", "0.0.0.0", "30002"]
