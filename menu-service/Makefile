@@ -2,8 +2,8 @@
 
 VER=v1.0
 
-PORT=3001
+PORT=30001
 
 run-menu:
-	docker image build -f Dockerfile -t menu-service:$(VER) .
+	cd .. && docker image build -f menu-service/Dockerfile -t menu-service:$(VER) .
 	docker container run -p $(PORT):$(PORT) -it --rm --name menu-service menu-service:$(VER)
