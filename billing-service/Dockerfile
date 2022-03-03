@@ -11,6 +11,6 @@ WORKDIR /billing-image
 
 RUN pip install -r requirements.txt
 
-EXPOSE 30001
+EXPOSE 30002
 
-CMD ["python", "app.py", "30001"]
+CMD ["python", "app.py", "30002"]
