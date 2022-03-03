@@ -2,7 +2,7 @@
 
 VER=v1.0
 
-PORT=3000
+PORT=30001
 
 run-billing:
 	docker image build -f Dockerfile -t billing-service:$(VER) .

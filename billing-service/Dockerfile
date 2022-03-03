@@ -1,8 +1,10 @@
 FROM python:3.7
 
 RUN mkdir /billing-image
+RUN mkdir /billing-image/db
 
-COPY . /billing-image/
+COPY ./billing-service /billing-image/
+COPY ./db /billing-image/db
 
 WORKDIR /billing-image
 
@@ -10,4 +12,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 3000
 
-CMD ["python", "app.py", "3000"]
+CMD ["python", "app.py", "30001"]
