@@ -162,6 +162,42 @@ Enter 'help' for command list.
         else:
             print("Thankyou for your payment. Enjoy your day!")
 
+    def bookTable(self, arg):
+        """
+        Book the table
+        """
+
+        response = requests.get(get_url(self. , self. , ' '))
+
+        if response.status_code != 200:
+            print("Unable to book the table. Please retry in some time")   
+
+        book_table_info = response.json()
+
+        for b_id in book_table_info["booking_id"]:
+            print("Your Booking ID is:", b_id)
+
+
+    def getBooking(self, arg):
+        """
+        Get the Booking Information
+        """
+
+        response = requests.get(get_url(self. , self. , ' '))
+
+        if response.status_code != 200:
+            print("Unable to get the booking information. Please retry in some time")
+
+        elif response.status_code == 422:
+            print("")
+
+        elif response.status_code == 409:
+            
+
+        get_table_info = response.json()
+
+        
+
     def do_quit(self, arg):
         """
         Quit the program.
