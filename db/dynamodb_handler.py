@@ -32,3 +32,23 @@ def add_order(user_id, price, is_paid):
     })
 
     return response
+
+
+def get_user_data(user_id):
+    response = order_table.get_item(Key={'user_id': user_id},
+                                    AttributesToGet=['amount', 'paid'])
+
+    return response
+
+
+def pay_bill(user_id):
+    response = order_table.update_item(
+        Key={'user_id': user_id},
+        AttributeUpdates={'paid': {
+            'Value': True,
+            'Action': 'PUT'
+        }},
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
+
+    return response
