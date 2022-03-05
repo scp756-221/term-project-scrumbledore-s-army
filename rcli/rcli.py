@@ -17,6 +17,8 @@ def parse_args():
     argp.add_argument('port_bill',
                       type=int,
                       help="Port number of billing server")
+    args.add_argument('name_book', help="IP address of booking server")
+    args.add_argument('port_book', type = int, help = "Port number of booking server")
 
     return argp.parse_args()
 
@@ -159,6 +161,7 @@ Enter 'help' for command list.
             )
         elif response.status_code != 200:
             print("Unable to pay bill. Please retry in some time.")
+
         else:
             print("Thankyou for your payment. Enjoy your day!")
 
@@ -167,36 +170,64 @@ Enter 'help' for command list.
         Book the table
         """
 
-        response = requests.get(get_url(self. , self. , ' '))
+        new_response = requests.get(get_url(self.name_book, self.port_book, ' '))
 
-        if response.status_code != 200:
+        if new_response.status_code != 200:
             print("Unable to book the table. Please retry in some time")   
 
-        book_table_info = response.json()
+        book_table_info = new_response.json()
 
         for b_id in book_table_info["booking_id"]:
             print("Your Booking ID is:", b_id)
+        """
+        Get the entire menu
+        """
+        response = requests.get(
+            get_url(self.name_menu, self.port_name, 'getMenuItems'))
 
+        menu_items = response.json()
+
+        print()
+        print("######## MENU ########")
+
+        menu_dict = {}
+
+        for item in menu_items["menu_items"]:
+            item_name = item["name"]
+            item_price = item["price"]
+            item_id = item["m_id"]
+
+            item_name_parts = item_name.split("_")
+            item_name_parts = [i.capitalize() for i in item_name_parts]
+            item_name = ' '.join(item_name_parts)
+
+            item_id = int(item_id)
+            sum = item_name + ':' + ' $' + item_price
+            menu_dict.update({item_id: sum})
+
+        print()
+
+        dictionary_items = menu_dict.items()
+        sorted_items = sorted(dictionary_items)
+
+        for i in range(0, len(sorted_items)):
+            print("Item Id:", sorted_items[i][0])
+            print(sorted_items[i][1])
+
+            print()
 
     def getBooking(self, arg):
         """
         Get the Booking Information
         """
 
-        response = requests.get(get_url(self. , self. , ' '))
+        response = requests.get(get_url(self.name_book , self.port_book, ' '))
 
-        if response.status_code != 200:
-            print("Unable to get the booking information. Please retry in some time")
+        if response.status_code == 200:
+            print("Thank you for making a booking with us!")
 
-        elif response.status_code == 422:
-            print("")
-
-        elif response.status_code == 409:
-            
-
-        get_table_info = response.json()
-
-        
+        else:
+            print("Unable to get the booking information")
 
     def do_quit(self, arg):
         """
