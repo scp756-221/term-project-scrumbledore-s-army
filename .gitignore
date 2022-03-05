@@ -6,4 +6,3 @@
 **/.env
 .idea/*
 eks.mak
-istio-1.13.1/
