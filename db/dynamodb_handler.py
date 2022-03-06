@@ -1,7 +1,7 @@
 import boto3
 
 from decouple import config
-from sqlalchemy import true
+from sqlalchemy import false, true
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
@@ -56,9 +56,8 @@ def pay_bill(user_id):
     return response
 
 
-def get_booking_data(booking_id):
+def get_booking_data():
     response = seating_table.scan()
-    response = response["Items"]
 
     return response
 
@@ -66,15 +65,8 @@ def get_booking_data(booking_id):
 def book_table(booking_id, table_id):
     response = seating_table.put_item(Item={
         'table_id': table_id,
-        'available': true,
+        'available': False,
         'booking_id': booking_id
     })
-
-    return response
-
-
-def get_booking_for_id(booking_id):
-    response = seating_table.get_item(Key={'booking_id': booking_id},
-                                    AttributesToGet=['booking_id', 'table_id'])
 
     return response
