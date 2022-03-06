@@ -64,6 +64,10 @@ def book_table():
 def get_booking():
     booking_id = request.args.get('booking_id')
     response = dynamodb.get_booking_data(booking_id)
+    if (response['ResponseMetadata']['HTTPStatusCode']==200):
+        return make_response("success",200)
+    else :
+        return make_response("booking Id not found",response['ResponseMetadata']['HTTPStatusCode'])
 
 
 if __name__ == '__main__':
