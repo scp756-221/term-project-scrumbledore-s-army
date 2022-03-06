@@ -5,4 +5,4 @@
 ./idea/*
 **/.env
 .idea/*
-eks.mak
+k8s.mak
