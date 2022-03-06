@@ -37,6 +37,7 @@ class Rcli(cmd.Cmd):
         self.port_name = args.port_menu
         self.user_id = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(
             uuid4())
+        self.b_id = ""
 
         self.prompt = 'rql: '
         self.intro = """
@@ -165,10 +166,28 @@ Enter 'help' for command list.
         else:
             print("Thankyou for your payment. Enjoy your day!")
 
-    def bookTable(self, arg):
+    def do_make_Booking(self, arg):
         """
         Book the table
         """
+        book_id = arg()
+        self.b_id = book_id.strip()
+
+        payload = {}
+        payload['booking_id'] = self.b_id
+
+        payload = json.dumps(payload)
+
+        response = requests.post(get_url(self.name_book, self.port_book,
+                                         'book'),
+                                 json=payload)
+
+        if response.status_code == 422:
+            print("Unable to process at the moment. Please re-try later")
+        elif (response.status_code != 200):
+            print("Unable to book the table. Please try again!")
+        else:
+            print("Your table is booked! Hope to see you soon!!")
 
         new_response = requests.get(get_url(self.name_book, self.port_book, ' '))
 
@@ -216,7 +235,7 @@ Enter 'help' for command list.
 
             print()
 
-    def getBooking(self, arg):
+    def do_get_Booking(self, arg):
         """
         Get the Booking Information
         """
