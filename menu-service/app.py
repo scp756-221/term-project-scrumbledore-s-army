@@ -15,20 +15,10 @@ def parse_args():
     return argp.parse_args()
 
 
-@app.route('/getMenuItems')
-def get_all_menu_data():
-    return dynamodb.get_menu()
-
-
-@app.route('/takeOrder', methods=['POST'])
-def take_order():
+def place_order(order_list, user_id):
     menu_data = dynamodb.get_menu()
-    order = json.loads(json.loads(request.data))
-    user_id = order['user_id']
-    order_list = order['order_list']
-
     total_price = 0
-
+    
     for selected_o in order_list:
         item_found = False
         for res_o in menu_data["menu_items"]:
@@ -44,6 +34,33 @@ def take_order():
             return make_response(jsonify(order_failure), 422)
 
     return dynamodb.add_order(user_id, total_price, False)
+
+
+
+@app.route('/getMenuItems')
+def get_all_menu_data():
+    return dynamodb.get_menu()
+
+
+@app.route('/takeOrder', methods=['POST'])
+def take_order():
+    order = json.loads(json.loads(request.data))
+    user_id = order['user_id']
+    order_list = order['order_list']
+    has_booked=order['has_booked']
+
+    if not has_booked:
+        seating = dynamodb.get_booking_data()
+        
+        for table_data in seating['Items']:
+            if table_data['available']:
+                available_table_id = table_data['table_id']
+                dynamodb.book_table(available_table_id)
+                place_order(order_list, user_id)
+            else:
+                return make_response("Invalid user.", 422)
+    else:
+        place_order(order_list, user_id)
 
 
 if __name__ == '__main__':
