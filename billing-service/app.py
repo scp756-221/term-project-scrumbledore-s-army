@@ -33,34 +33,45 @@ def generate_bill():
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
-    response = dynamodb.get_user_data(user)
+    has_booking = 'booking_id' in request.args.keys()
+    
+    if has_booking:
+        booking_id = request.args.get('booking_id')
 
-    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        if ('Item' in response):
-            data = response['Item']
+    else:
+        booking_id = None
+    
+    table_response = dynamodb.set_table_availability(booking_id)
 
-            if data["amount"] == 0:
-                return make_response(
-                    "The amount value is zero. Cannot pay the bill.", 422)
-            elif data["paid"] == True:
-                return make_response("The bill has already been paid.", 409)
+    if table_response['status'] == 200:
+        response = dynamodb.get_user_data(user)
 
-            else:
-                update_response = dynamodb.pay_bill(user)
-                if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
-                        200):
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            if ('Item' in response):
+                data = response['Item']
+
+                if data["amount"] == 0:
+                    return make_response(
+                        "The amount value is zero. Cannot pay the bill.", 422)
+                elif data["paid"] == True:
+                    return make_response("The bill has already been paid.", 409)
+
+                else:
+                    update_response = dynamodb.pay_bill(user)
+                    if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
+                            200):
+                        return {
+                            'msg': 'Paid successfully',
+                            'ModifiedAttributes': update_response['Attributes'],
+                            'response': update_response['ResponseMetadata']
+                        }
+
                     return {
-                        'msg': 'Paid successfully',
-                        'ModifiedAttributes': update_response['Attributes'],
-                        'response': update_response['ResponseMetadata']
+                        'msg': 'Some error occured',
+                        'response': update_response
                     }
 
-                return {
-                    'msg': 'Some error occured',
-                    'response': update_response
-                }
-
-        return create_user_error()
+            return create_user_error()
 
     return create_user_error()
 
