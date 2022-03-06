@@ -15,7 +15,7 @@ resource = boto3.resource(
 
 menu_table = resource.Table('menu')
 order_table = resource.Table('order')
-
+seating_table = resource.Table('seating')
 
 def get_menu():
     response = menu_table.scan()
@@ -52,3 +52,45 @@ def pay_bill(user_id):
     )
 
     return response
+
+
+def set_table_availability(booking_id=None):
+    response = seating_table.scan()
+    response = response["Items"]
+
+    for table in response:
+        if table['available'] == False and booking_id == table['booking_id']:
+            response = seating_table.update_item(
+                Key={'table_id': table['table_id']},
+                AttributeUpdates={'available': {
+                    'Value': True,
+                    'Action': 'PUT'
+                },
+                'booking_id': {
+                    'Value': None,
+                    'Action': 'PUT'
+                }},
+                ReturnValues="UPDATED_NEW"  # returns the new updated values
+            )
+
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                return {'status': 200}
+            else:
+                {"status": 422}     
+
+        if table['available'] == False and booking_id is not None:
+            response = seating_table.update_item(
+                Key={'table_id': table['table_id']},
+                AttributeUpdates={'available': {
+                    'Value': True,
+                    'Action': 'PUT'
+                }},
+                ReturnValues="UPDATED_NEW"  # returns the new updated values
+            )
+
+            if response['ResponseMetadata']['HTTPStatusCode'] == 200:
+                return {'status': 200}
+            else:
+                {"status": 422}     
+
+    return {"status": 422}
