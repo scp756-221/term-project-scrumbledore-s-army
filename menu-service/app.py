@@ -26,24 +26,45 @@ def take_order():
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']
+    has_booked=order['has_booked']
 
-    total_price = 0
+    if not has_booked:
+        seating = dynamodb.get_booking_data()
+        for table_data in seating['Items']:
+            if table_data['available']:
+                available_table_id = table_data['table_id']
+               dynamodb.book_table(booking_id=None, available_table_id)
+               Update_t()
+        # seating = dynamodb.get()
+        # table_id = seating['table_id']
+        # available = seating['available']
+        # ind=available.index(True)
+        # available[ind]=False
+        # has_booked=True
+    else:
+        Update_t()
+    def Update_t():
 
-    for selected_o in order_list:
-        item_found = False
-        for res_o in menu_data["menu_items"]:
-            if int(selected_o['id']) == int(res_o['m_id']):
-                item_found = True
-                qty = selected_o['qty']
-                price = res_o['price']
-                total_price += (price * qty)
+        
+        total_price = 0
 
-        if item_found == False:
-            order_failure = {"status": False, "message": "Order Declined"}
+        for selected_o in order_list:
+            item_found = False
+            for res_o in menu_data["menu_items"]:
+                if int(selected_o['id']) == int(res_o['m_id']):
+                    item_found = True
+                    qty = selected_o['qty']
+                    price = res_o['price']
+                    total_price += (price * qty)
 
-            return make_response(jsonify(order_failure), 422)
+            if item_found == False:
+                order_failure = {"status": False, "message": "Order Declined"}
 
-    return dynamodb.add_order(user_id, total_price, False)
+                return make_response(jsonify(order_failure), 422)
+
+        return dynamodb.add_order(user_id, total_price, False)
+    
+
 
 
 if __name__ == '__main__':
