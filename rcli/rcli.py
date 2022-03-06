@@ -226,8 +226,11 @@ Enter 'help' for command list.
         if response.status_code == 200:
             print("Thank you for making a booking with us!")
 
+        elif response.status_code == 422:
+            print("Unable to get the information")
+
         else:
-            print("Unable to get the booking information")
+            print("Your request cannot be completed")
 
     def do_quit(self, arg):
         """
