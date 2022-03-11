@@ -1,7 +1,6 @@
 import boto3
 
 from decouple import config
-from sqlalchemy import true
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
