@@ -1,7 +1,6 @@
 import boto3
 
 from decouple import config
-from sqlalchemy import false, true
 
 AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
@@ -63,10 +62,17 @@ def get_booking_data():
 
 
 def book_table(booking_id, table_id):
-    response = seating_table.put_item(Item={
-        'table_id': table_id,
-        'available': False,
-        'booking_id': booking_id
-    })
+    response = seating_table.update_item(
+        Key={'table_id': table_id},
+        AttributeUpdates={'available': {
+            'Value': False,
+            'Action': 'PUT'
+        },
+        'booking_id': {
+            'Value': booking_id,
+            'Action': 'PUT'
+        }},
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
 
     return response

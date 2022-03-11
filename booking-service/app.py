@@ -41,6 +41,8 @@ def book_table():
 @app.route('/get_booking', methods=['GET'])
 def get_booking():
     booking_id = request.args.get('booking_id')
+    if booking_id == None or booking_id == "":
+        return make_response('No booking id found!', 422)
     response = dynamodb.get_booking_data()
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         for table_data in response['Items']:
