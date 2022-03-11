@@ -78,11 +78,3 @@ def book_table(table_id, booking_id=None):
     )
 
     return response
-
-
-def get_booking_for_id(booking_id):
-    response = seating_table.get_item(
-        Key={'booking_id': booking_id},
-        AttributesToGet=['booking_id', 'table_id'])
-
-    return response

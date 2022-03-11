@@ -58,11 +58,13 @@ def take_order():
 
     if not has_booked:
         seating = dynamodb.get_booking_data()
-        for table_data in seating['Items']:
-            if table_data['available']:
-                available_table_id = table_data['table_id']
-                dynamodb.book_table(available_table_id)
-                return place_order(order_list, user_id)
+        if (seating['ResponseMetadata']['HTTPStatusCode'] == 200):
+            for table_data in seating['Items']:
+                if table_data['available']:
+                    available_table_id = table_data['table_id']
+                    dynamodb.book_table(available_table_id)
+
+                    return place_order(order_list, user_id)
     else:
         return place_order(order_list, user_id)
 
