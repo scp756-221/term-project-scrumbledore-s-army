@@ -58,7 +58,6 @@ def pay_bill(user_id):
 
 def get_booking_data():
     response = seating_table.scan()
-    response = response["Items"]
 
     return response
 

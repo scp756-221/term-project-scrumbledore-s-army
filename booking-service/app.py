@@ -1,6 +1,8 @@
 import argparse
+from urllib import response
 
 from flask import Flask, make_response, request
+from sqlalchemy import true
 
 import db.dynamodb_handler as dynamodb
 
@@ -18,56 +20,36 @@ def parse_args():
 
 @app.route('/book', methods=['GET'])
 def book_table():
-    booking_data = dynamodb.get_booking_data()
+    booking_id = request.args.get('booking_id')
+    response = dynamodb.get_booking_data()
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        for table_data in response['Items']:
+            if table_data['available']:
+                available_table_id = table_data['table_id']
+                update_response = dynamodb.book_table(booking_id, available_table_id)
+                if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
+                        200):
+                    return {
+                        "booking_id":booking_id
+                    }
+                else:
+                    return make_response("Could not make the booking.", 400)
 
-    # if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-    #     if ('Item' in response):
-    #         data = response['Item']
-
-    #         if data["amount"] == 0:
-    #             return make_response(
-    #                 "The amount value is zero. Cannot pay the bill.", 422)
-    #         elif data["paid"] == True:
-    #             return make_response("The bill has already been paid.", 409)
-
-    #         else:
-    #             update_response = dynamodb.pay_bill(user)
-    #             if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
-    #                     200):
-    #                 return {
-    #                     'msg': 'Paid successfully',
-    #                     'ModifiedAttributes': update_response['Attributes'],
-    #                     'response': update_response['ResponseMetadata']
-    #                 }
-
-    #             return {
-    #                 'msg': 'Some error occured',
-    #                 'response': update_response
-    #             }
-
-
-
-    # user = request.args.get('user_id')
-    # response = dynamodb.get_user_data(user)
-
-    # if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-    #     if ('Item' in response):
-    #         return make_response(response["Item"], 200)
-
-    #     return create_user_error()
-
-    # return create_user_error()
-    pass
+    return make_response("No table available.", 422)
 
 
 @app.route('/get_booking', methods=['GET'])
 def get_booking():
     booking_id = request.args.get('booking_id')
-    response = dynamodb.get_booking_data(booking_id)
-    if (response['ResponseMetadata']['HTTPStatusCode']==200):
-        return make_response("success",200)
-    else :
-        return make_response("booking Id not found",response['ResponseMetadata']['HTTPStatusCode'])
+    if booking_id == None or booking_id == "":
+        return make_response('No booking id found!', 422)
+    response = dynamodb.get_booking_data()
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        for table_data in response['Items']:
+            if table_data['booking_id'] == booking_id:
+                return make_response('Success!', 200)
+
+    return make_response('Could not find the booking!', 422)
 
 
 if __name__ == '__main__':
