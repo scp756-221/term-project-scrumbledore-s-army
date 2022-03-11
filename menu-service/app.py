@@ -33,7 +33,15 @@ def place_order(order_list, user_id):
 
             return make_response(jsonify(order_failure), 422)
 
-    return dynamodb.add_order(user_id, total_price, False)
+    response = dynamodb.add_order(user_id, total_price, False)
+    
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if ('Item' in response):
+            return make_response(response["Item"], 200)
+
+        return create_user_error()
+
+    return create_user_error()
 
 
 
@@ -51,17 +59,18 @@ def take_order():
 
     if not has_booked:
         seating = dynamodb.get_booking_data()
-        
         for table_data in seating['Items']:
             if table_data['available']:
                 available_table_id = table_data['table_id']
                 dynamodb.book_table(available_table_id)
-                place_order(order_list, user_id)
-            else:
-                return make_response("Invalid user.", 422)
+                return place_order(order_list, user_id)
     else:
-        place_order(order_list, user_id)
+        return place_order(order_list, user_id)
 
+    return create_user_error()
+
+def create_user_error():
+    return make_response("Invalid user.", 422)
 
 if __name__ == '__main__':
     args = parse_args()
