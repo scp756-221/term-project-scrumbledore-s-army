@@ -18,7 +18,7 @@ def parse_args():
 def place_order(order_list, user_id):
     menu_data = dynamodb.get_menu()
     total_price = 0
-    
+
     for selected_o in order_list:
         item_found = False
         for res_o in menu_data["menu_items"]:
@@ -34,7 +34,7 @@ def place_order(order_list, user_id):
             return make_response(jsonify(order_failure), 422)
 
     response = dynamodb.add_order(user_id, total_price, False)
-    
+
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         if ('Item' in response):
             return make_response(response["Item"], 200)
@@ -42,7 +42,6 @@ def place_order(order_list, user_id):
         return create_user_error()
 
     return create_user_error()
-
 
 
 @app.route('/getMenuItems')
@@ -55,7 +54,7 @@ def take_order():
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']
-    has_booked=order['has_booked']
+    has_booked = order['has_booked']
 
     if not has_booked:
         seating = dynamodb.get_booking_data()
@@ -69,8 +68,10 @@ def take_order():
 
     return create_user_error()
 
+
 def create_user_error():
     return make_response("Invalid user.", 422)
+
 
 if __name__ == '__main__':
     args = parse_args()

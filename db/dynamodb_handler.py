@@ -64,14 +64,16 @@ def get_booking_data():
 def book_table(table_id, booking_id=None):
     response = seating_table.update_item(
         Key={'table_id': table_id},
-        AttributeUpdates={'available': {
-            'Value': False,
-            'Action': 'PUT'
+        AttributeUpdates={
+            'available': {
+                'Value': False,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': booking_id,
+                'Action': 'PUT'
+            }
         },
-        'booking_id': {
-            'Value': booking_id,
-            'Action': 'PUT'
-        }},
         ReturnValues="UPDATED_NEW"  # returns the new updated values
     )
 
@@ -79,7 +81,8 @@ def book_table(table_id, booking_id=None):
 
 
 def get_booking_for_id(booking_id):
-    response = seating_table.get_item(Key={'booking_id': booking_id},
-                                    AttributesToGet=['booking_id', 'table_id'])
+    response = seating_table.get_item(
+        Key={'booking_id': booking_id},
+        AttributesToGet=['booking_id', 'table_id'])
 
     return response
