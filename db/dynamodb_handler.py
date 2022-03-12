@@ -61,17 +61,19 @@ def get_booking_data():
     return response
 
 
-def book_table(booking_id, table_id):
+def book_table(table_id, booking_id=None):
     response = seating_table.update_item(
         Key={'table_id': table_id},
-        AttributeUpdates={'available': {
-            'Value': False,
-            'Action': 'PUT'
+        AttributeUpdates={
+            'available': {
+                'Value': False,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': booking_id,
+                'Action': 'PUT'
+            }
         },
-        'booking_id': {
-            'Value': booking_id,
-            'Action': 'PUT'
-        }},
         ReturnValues="UPDATED_NEW"  # returns the new updated values
     )
 

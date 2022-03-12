@@ -26,12 +26,11 @@ def book_table():
         for table_data in response['Items']:
             if table_data['available']:
                 available_table_id = table_data['table_id']
-                update_response = dynamodb.book_table(booking_id, available_table_id)
+                update_response = dynamodb.book_table(booking_id,
+                                                      available_table_id)
                 if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
                         200):
-                    return {
-                        "booking_id":booking_id
-                    }
+                    return {"booking_id": booking_id}
                 else:
                     return make_response("Could not make the booking.", 400)
 
