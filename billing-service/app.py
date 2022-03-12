@@ -34,13 +34,13 @@ def generate_bill():
 def make_payment():
     user = request.args.get('user_id')
     has_booking = 'booking_id' in request.args.keys()
-    
+
     if has_booking:
         booking_id = request.args.get('booking_id')
 
     else:
         booking_id = None
-    
+
     table_response = dynamodb.set_table_availability(booking_id)
 
     if table_response['status'] == 200:
@@ -54,15 +54,17 @@ def make_payment():
                     return make_response(
                         "The amount value is zero. Cannot pay the bill.", 422)
                 elif data["paid"] == True:
-                    return make_response("The bill has already been paid.", 409)
+                    return make_response("The bill has already been paid.",
+                                         409)
 
                 else:
                     update_response = dynamodb.pay_bill(user)
-                    if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
-                            200):
+                    if (update_response['ResponseMetadata']['HTTPStatusCode']
+                            == 200):
                         return {
                             'msg': 'Paid successfully',
-                            'ModifiedAttributes': update_response['Attributes'],
+                            'ModifiedAttributes':
+                            update_response['Attributes'],
                             'response': update_response['ResponseMetadata']
                         }
 

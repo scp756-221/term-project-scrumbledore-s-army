@@ -63,38 +63,44 @@ def set_table_availability(booking_id=None):
         if table['available'] == False and booking_id == table['booking_id']:
             response = seating_table.update_item(
                 Key={'table_id': table['table_id']},
-                AttributeUpdates={'available': {
-                    'Value': True,
-                    'Action': 'PUT'
+                AttributeUpdates={
+                    'available': {
+                        'Value': True,
+                        'Action': 'PUT'
+                    },
+                    'booking_id': {
+                        'Value': None,
+                        'Action': 'PUT'
+                    }
                 },
-                'booking_id': {
-                    'Value': None,
-                    'Action': 'PUT'
-                }},
                 ReturnValues="UPDATED_NEW"  # returns the new updated values
             )
 
             if response['ResponseMetadata']['HTTPStatusCode'] == 200:
                 return {'status': 200}
             else:
-                {"status": 422}     
+                {"status": 422}
 
         if table['available'] == False and booking_id is not None:
             response = seating_table.update_item(
                 Key={'table_id': table['table_id']},
-                AttributeUpdates={'available': {
-                    'Value': True,
-                    'Action': 'PUT'
-                }},
+                AttributeUpdates={
+                    'available': {
+                        'Value': True,
+                        'Action': 'PUT'
+                    }
+                },
                 ReturnValues="UPDATED_NEW"  # returns the new updated values
             )
 
             if response['ResponseMetadata']['HTTPStatusCode'] == 200:
                 return {'status': 200}
             else:
-                {"status": 422}     
+                {"status": 422}
 
     return {"status": 422}
+
+
 def get_booking_data():
     response = seating_table.scan()
 
