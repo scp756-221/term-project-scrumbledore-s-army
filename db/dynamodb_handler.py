@@ -17,6 +17,7 @@ menu_table = resource.Table('menu')
 order_table = resource.Table('order')
 seating_table = resource.Table('seating')
 
+
 def get_menu():
     response = menu_table.scan()
     response = response["Items"]
@@ -94,3 +95,26 @@ def set_table_availability(booking_id=None):
                 {"status": 422}     
 
     return {"status": 422}
+def get_booking_data():
+    response = seating_table.scan()
+
+    return response
+
+
+def book_table(table_id, booking_id=None):
+    response = seating_table.update_item(
+        Key={'table_id': table_id},
+        AttributeUpdates={
+            'available': {
+                'Value': False,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': booking_id,
+                'Action': 'PUT'
+            }
+        },
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
+
+    return response
