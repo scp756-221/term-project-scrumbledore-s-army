@@ -35,15 +35,25 @@ def make_payment():
     user = request.args.get('user_id')
     has_booking = 'booking_id' in request.args.keys()
 
-    if has_booking:
-        booking_id = request.args.get('booking_id')
+    response = dynamodb.get_booking_data()
+    table_id = None
 
-    else:
-        booking_id = None
+    if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+        if has_booking:
+            booking_id = request.args.get('booking_id')
+            for table in response['Items']:
+                if table['available'] == False and table[
+                        'booking_id'] == booking_id:
+                    table_id = table['table_id']
+        else:
+            for table in response['Items']:
+                if table['available'] == False and table[
+                        'booking_id'] is not None:
+                    table_id = table['table']
 
-    table_response = dynamodb.set_table_availability(booking_id)
+    table_response = dynamodb.set_table_availability(table_id)
 
-    if table_response['status'] == 200:
+    if table_response['ResponseMetadata']['HTTPStatusCode'] == 200:
         response = dynamodb.get_user_data(user)
 
         if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
