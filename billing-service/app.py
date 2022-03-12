@@ -48,7 +48,7 @@ def make_payment():
         else:
             for table in response['Items']:
                 if table['available'] == False and table[
-                        'booking_id'] is not None:
+                        'booking_id'] is None:
                     table_id = table['table']
 
     table_response = dynamodb.set_table_availability(table_id)
