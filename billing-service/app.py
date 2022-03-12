@@ -33,34 +33,57 @@ def generate_bill():
 @app.route('/pay', methods=['GET'])
 def make_payment():
     user = request.args.get('user_id')
-    response = dynamodb.get_user_data(user)
+    has_booking = 'booking_id' in request.args.keys()
+
+    response = dynamodb.get_booking_data()
+    table_id = None
 
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        if ('Item' in response):
-            data = response['Item']
+        if has_booking:
+            booking_id = request.args.get('booking_id')
+            for table in response['Items']:
+                if table['available'] == False and table[
+                        'booking_id'] == booking_id:
+                    table_id = table['table_id']
+        else:
+            for table in response['Items']:
+                if table['available'] == False and table[
+                        'booking_id'] is None:
+                    table_id = table['table']
 
-            if data["amount"] == 0:
-                return make_response(
-                    "The amount value is zero. Cannot pay the bill.", 422)
-            elif data["paid"] == True:
-                return make_response("The bill has already been paid.", 409)
+    table_response = dynamodb.set_table_availability(table_id)
 
-            else:
-                update_response = dynamodb.pay_bill(user)
-                if (update_response['ResponseMetadata']['HTTPStatusCode'] ==
-                        200):
+    if table_response['ResponseMetadata']['HTTPStatusCode'] == 200:
+        response = dynamodb.get_user_data(user)
+
+        if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
+            if ('Item' in response):
+                data = response['Item']
+
+                if data["amount"] == 0:
+                    return make_response(
+                        "The amount value is zero. Cannot pay the bill.", 422)
+                elif data["paid"] == True:
+                    return make_response("The bill has already been paid.",
+                                         409)
+
+                else:
+                    update_response = dynamodb.pay_bill(user)
+                    if (update_response['ResponseMetadata']['HTTPStatusCode']
+                            == 200):
+                        return {
+                            'msg': 'Paid successfully',
+                            'ModifiedAttributes':
+                            update_response['Attributes'],
+                            'response': update_response['ResponseMetadata']
+                        }
+
                     return {
-                        'msg': 'Paid successfully',
-                        'ModifiedAttributes': update_response['Attributes'],
-                        'response': update_response['ResponseMetadata']
+                        'msg': 'Some error occured',
+                        'response': update_response
                     }
 
-                return {
-                    'msg': 'Some error occured',
-                    'response': update_response
-                }
-
-        return create_user_error()
+            return create_user_error()
 
     return create_user_error()
 

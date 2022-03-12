@@ -55,6 +55,25 @@ def pay_bill(user_id):
     return response
 
 
+def set_table_availability(table_id):
+    response = seating_table.update_item(
+        Key={'table_id': table_id},
+        AttributeUpdates={
+            'available': {
+                'Value': True,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': None,
+                'Action': 'PUT'
+            }
+        },
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
+
+    return response
+
+
 def get_booking_data():
     response = seating_table.scan()
 
