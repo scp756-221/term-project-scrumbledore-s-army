@@ -15,6 +15,7 @@ resource = boto3.resource(
 
 menu_table = resource.Table('menu')
 order_table = resource.Table('order')
+seating_table = resource.Table('seating')
 
 
 def get_menu():
@@ -48,6 +49,50 @@ def pay_bill(user_id):
             'Value': True,
             'Action': 'PUT'
         }},
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
+
+    return response
+
+
+def set_table_availability(table_id):
+    response = seating_table.update_item(
+        Key={'table_id': table_id},
+        AttributeUpdates={
+            'available': {
+                'Value': True,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': None,
+                'Action': 'PUT'
+            }
+        },
+        ReturnValues="UPDATED_NEW"  # returns the new updated values
+    )
+
+    return response
+
+
+def get_booking_data():
+    response = seating_table.scan()
+
+    return response
+
+
+def book_table(table_id, booking_id=None):
+    response = seating_table.update_item(
+        Key={'table_id': table_id},
+        AttributeUpdates={
+            'available': {
+                'Value': False,
+                'Action': 'PUT'
+            },
+            'booking_id': {
+                'Value': booking_id,
+                'Action': 'PUT'
+            }
+        },
         ReturnValues="UPDATED_NEW"  # returns the new updated values
     )
 
