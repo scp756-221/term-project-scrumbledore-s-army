@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.8-slim-buster
 
 RUN mkdir /rcli-image
 
@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 ENTRYPOINT ["python", "rcli.py"]
 
-CMD [ "0.0.0.0", "30001", "0.0.0.0", "30002"]
+CMD [ "0.0.0.0", "30001", "0.0.0.0", "30002", "0.0.0.0", "30003"]

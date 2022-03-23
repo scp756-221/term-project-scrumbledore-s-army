@@ -36,10 +36,7 @@ def place_order(order_list, user_id):
     response = dynamodb.add_order(user_id, total_price, False)
 
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
-        if ('Item' in response):
-            return make_response(response["Item"], 200)
-
-        return create_user_error()
+        return make_response("Order successfully placed!", 200)
 
     return create_user_error()
 
