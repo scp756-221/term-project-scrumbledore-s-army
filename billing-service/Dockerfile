@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.8-slim-buster
 
 RUN mkdir /billing-image
 RUN mkdir /billing-image/db
