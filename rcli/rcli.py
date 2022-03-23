@@ -154,7 +154,7 @@ Enter 'help' for command list.
         Pay the bill for your order
         """
         request_params = {'user_id': self.user_id}
-        
+
         if self.booking_id != "":
             request_params["booking_id"] = self.booking_id
 
@@ -199,11 +199,9 @@ Enter 'help' for command list.
         """
         book_id = arg.strip()
 
-        response = requests.get(
-            get_url(self.name_book,
-                    self.port_book,
-                    'get_booking'),
-                    params={'booking_id': book_id})
+        response = requests.get(get_url(self.name_book, self.port_book,
+                                        'get_booking'),
+                                params={'booking_id': book_id})
 
         if response.status_code == 200:
             self.booking_id = book_id
