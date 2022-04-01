@@ -16,19 +16,20 @@
 
 EKS=eksctl
 KC=kubectl
+IC=istioctl
 
 # Keep all the logs out of main directory
 LOG_DIR=logs
 
 # these might need to change
-NS=rservicens
+NS=rsns
 CLUSTER_NAME=awsrservice
 EKS_CTX=awsrservice
 
 
 NGROUP=worker-nodes
 NTYPE=t3.medium
-REGION=ZZ-AWS-REGION
+REGION=us-west-2
 KVER=1.21
 
 
@@ -72,3 +73,22 @@ cd:
 showcontext:
 	$(KC) config get-contexts
 
+setnamespace:
+	$(KC) config use-context $(EKS_CTX)
+	$(KC) create ns $(NS)
+	$(KC) config set-context $(EKS_CTX) --namespace=$(NS)
+
+setistio:
+	$(KC) config use-context $(EKS_CTX)
+	$(IC) install -y --set profile=demo --set hub=gcr.io/istio-release
+	$(KC) label namespace $(NS) istio-injection=enabled
+
+publishimage:
+	cd menu-service && make publish-image
+	cd billing-service && make publish-image
+	cd booking-service && make publish-image
+
+deployservice:
+	cd menu-service && $(KC) apply -f deployment.yaml
+	cd billing-service && $(KC) apply -f deployment.yaml
+	cd booking-service && $(KC) apply -f deployment.yaml

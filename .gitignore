@@ -5,5 +5,3 @@
 ./idea/*
 **/.env
 .idea/*
-k8s.mak
-tools/ghcr.io-token.txt
