@@ -1,0 +1,13 @@
+{
+    "TableName": "seating",
+    "KeySchema": [
+      { "AttributeName": "table_id", "KeyType": "HASH" }
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "table_id", "AttributeType": "N" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 5,
+      "WriteCapacityUnits": 5
+    }
+}

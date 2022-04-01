@@ -1,0 +1,52 @@
+{
+    "seating": [
+      {
+        "PutRequest": {
+          "Item": {
+            "table_id": {
+              "N": "1"
+            },
+            "available": {
+              "BOOL": true
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "table_id": {
+              "N": "2"
+            },
+            "available": {
+              "BOOL": true
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "table_id": {
+              "N": "3"
+            },
+            "available": {
+              "BOOL": true
+            }
+          }
+        }
+      },
+      {
+        "PutRequest": {
+          "Item": {
+            "table_id": {
+              "N": "4"
+            },
+            "available": {
+              "BOOL": true
+            }
+          }
+        }
+      }
+    ]
+  }

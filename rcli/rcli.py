@@ -17,6 +17,10 @@ def parse_args():
     argp.add_argument('port_bill',
                       type=int,
                       help="Port number of billing server")
+    argp.add_argument('name_book', help="IP address of booking server")
+    argp.add_argument('port_book',
+                      type=int,
+                      help="Port number of booking server")
 
     return argp.parse_args()
 
@@ -26,15 +30,18 @@ def get_url(name, port, endpoint):
 
 
 class Rcli(cmd.Cmd):
-
     def __init__(self, args):
         cmd.Cmd.__init__(self)
         self.name_bill = args.name_bill
         self.name_menu = args.name_menu
+        self.name_book = args.name_book
         self.port_bill = args.port_bill
-        self.port_name = args.port_menu
+        self.port_menu = args.port_menu
+        self.port_book = args.port_book
+
         self.user_id = datetime.now().strftime('%Y%m-%d%H-%M%S-') + str(
             uuid4())
+        self.booking_id = ""
 
         self.prompt = 'rql: '
         self.intro = """
@@ -48,7 +55,7 @@ Enter 'help' for command list.
         Get the entire menu
         """
         response = requests.get(
-            get_url(self.name_menu, self.port_name, 'getMenuItems'))
+            get_url(self.name_menu, self.port_menu, 'getMenuItems'))
 
         if response.status_code != 200:
             print("Unable to get menu. Please retry in some time.")
@@ -102,10 +109,11 @@ Enter 'help' for command list.
         payload = {}
         payload['user_id'] = self.user_id
         payload['order_list'] = order_list
+        payload['has_booked'] = self.booking_id != ""
 
         payload = json.dumps(payload, indent=4)
 
-        response = requests.post(get_url(self.name_menu, self.port_name,
+        response = requests.post(get_url(self.name_menu, self.port_menu,
                                          'takeOrder'),
                                  json=payload)
 
@@ -145,9 +153,13 @@ Enter 'help' for command list.
         """
         Pay the bill for your order
         """
+        request_params = {'user_id': self.user_id}
+
+        if self.booking_id != "":
+            request_params["booking_id"] = self.booking_id
 
         response = requests.get(get_url(self.name_bill, self.port_bill, 'pay'),
-                                params={'user_id': self.user_id})
+                                params=request_params)
 
         if response.status_code == 422:
             print(
@@ -159,8 +171,49 @@ Enter 'help' for command list.
             )
         elif response.status_code != 200:
             print("Unable to pay bill. Please retry in some time.")
+
         else:
             print("Thankyou for your payment. Enjoy your day!")
+
+    def do_book_table(self, arg):
+        """
+        Book the table
+        """
+        self.booking_id = arg.strip()
+
+        response = requests.get(get_url(self.name_book, self.port_book,
+                                        'book'),
+                                params={'booking_id': self.booking_id})
+
+        if response.status_code == 422:
+            print("Unable to process at the moment. Please re-try later")
+        elif (response.status_code != 200):
+            print("Unable to book the table. Please try again!")
+        else:
+            print("Your table is booked! Hope to see you soon!!")
+            print("Your Booking ID is:", self.booking_id)
+
+    def do_get_booking(self, arg):
+        """
+        Get the Booking Information
+        """
+        book_id = arg.strip()
+
+        response = requests.get(get_url(self.name_book, self.port_book,
+                                        'get_booking'),
+                                params={'booking_id': book_id})
+
+        if response.status_code == 200:
+            self.booking_id = book_id
+            print("Welcome to our restaurant!")
+
+        elif response.status_code == 422:
+            print(
+                "Unable to get your booking. Please try again with the correct booking ID."
+            )
+
+        else:
+            print("Your request cannot be completed.")
 
     def do_quit(self, arg):
         """
