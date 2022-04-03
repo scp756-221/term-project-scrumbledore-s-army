@@ -93,7 +93,19 @@ deployservice:
 	cd billing-service && $(KC) apply -f deployment.yaml
 	cd booking-service && $(KC) apply -f deployment.yaml
 
+rollout: rollout-menu rollout-billing rollout-booking 
+
 rollout-menu:
 	cd menu-service && make publish-image
 	cd menu-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/menu-service
+
+rollout-billing:
+	cd billing-service && make publish-image
+	cd billing-service && $(KC) apply -f deployment.yaml 
+	$(KC) rollout -n $(NS) restart deployment/billing-service
+
+rollout-booking:
+	cd booking-service && make publish-image
+	cd booking-service && $(KC) apply -f deployment.yaml 
+	$(KC) rollout -n $(NS) restart deployment/booking-service
