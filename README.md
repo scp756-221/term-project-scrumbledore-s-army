@@ -6,7 +6,7 @@ Steps to create EKS cluster and installing `istio`
 make -f k8s.mak start
 make -f k8s.mak setnamespace
 make -f k8s.mak setistio
-cat tools/ghcr.io-token.txt | docker login ghcr.io -u REGID --password-stdin
+cat tools/ghcr.io-token.txt | docker login ghcr.io -u subclassy --password-stdin
 make -f k8s.mak publishimage
 make -f k8s.mak deployservice
 ```

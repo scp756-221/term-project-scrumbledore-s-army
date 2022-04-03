@@ -92,3 +92,8 @@ deployservice:
 	cd menu-service && $(KC) apply -f deployment.yaml
 	cd billing-service && $(KC) apply -f deployment.yaml
 	cd booking-service && $(KC) apply -f deployment.yaml
+
+rollout-menu:
+	cd menu-service && make publish-image
+	cd menu-service && $(KC) apply -f deployment.yaml 
+	$(KC) rollout -n $(NS) restart deployment/menu-service
