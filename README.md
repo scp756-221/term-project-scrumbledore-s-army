@@ -11,3 +11,8 @@ make -f k8s.mak publishimage
 make -f k8s.mak deployservice
 ```
 Use `kubectl get svc --all-namespaces` to get the IP for the services.
+
+After using the EKS cluster ensure to stop the cluster, in order to prevent absurd charges
+```
+make -f k8s.mak stop
+```
