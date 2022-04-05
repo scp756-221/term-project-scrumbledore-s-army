@@ -119,6 +119,8 @@ Enter 'help' for command list.
 
         if response.status_code == 422:
             print("Incorrect menu items. Please be careful while ordering.")
+        elif response.status_code == 500:
+            print("We are currently fully booked. Maybe place a reservation beforehand.")
         elif (response.status_code != 200):
             print("Unable to place order. Please try again!")
         else:

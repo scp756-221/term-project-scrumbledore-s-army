@@ -38,7 +38,7 @@ def place_order(order_list, user_id):
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         return make_response("Order successfully placed!", 200)
 
-    return create_user_error()
+    return create_error(code=500)
 
 
 @app.route('/getMenuItems')
@@ -65,11 +65,11 @@ def take_order():
     else:
         return place_order(order_list, user_id)
 
-    return create_user_error()
+    return create_error(code=500)
 
 
-def create_user_error():
-    return make_response("Invalid user.", 422)
+def create_error(code=422):
+    return make_response("Invalid user.", code)
 
 
 if __name__ == '__main__':
