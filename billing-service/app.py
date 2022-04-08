@@ -1,10 +1,13 @@
 import argparse
 
-from flask import Flask, make_response, request
-
 import db.dynamodb_handler as dynamodb
+from flask import Flask, make_response, request
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+metrics.info('app_info', 'Billing Service')
 
 
 def parse_args():
