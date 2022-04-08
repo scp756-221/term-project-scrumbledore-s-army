@@ -77,4 +77,4 @@ def create_error(code=422):
 
 if __name__ == '__main__':
     args = parse_args()
-    app.run(host='0.0.0.0', port=args.port_menu, debug=True)
+    app.run(host='0.0.0.0', port=args.port_menu)

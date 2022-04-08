@@ -96,4 +96,4 @@ def create_user_error():
 
 if __name__ == '__main__':
     args = parse_args()
-    app.run(host='0.0.0.0', port=args.port_bill, debug=True)
+    app.run(host='0.0.0.0', port=args.port_bill)
