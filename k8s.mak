@@ -17,6 +17,7 @@
 EKS=eksctl
 KC=kubectl
 IC=istioctl
+HM=helm
 
 # Keep all the logs out of main directory
 LOG_DIR=logs
@@ -109,3 +110,33 @@ rollout-booking:
 	cd booking-service && make publish-image
 	cd booking-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/booking-service
+
+provision: helm prom grafana
+
+helm:
+	$(HM) repo add prometheus-community https://prometheus-community.github.io/helm-charts
+	$(HM) repo add grafana https://grafana.github.io/helm-charts
+	$(HM) repo update
+
+prom:
+	$(KC) create namespace prometheus
+	$(HM) install prometheus prometheus-community/prometheus \
+		--namespace prometheus \
+		--set alertmanager.persistentVolume.storageClass="gp2" \
+		--set server.persistentVolume.storageClass="gp2"
+	$(KC) port-forward -n prometheus deploy/prometheus-server 8080:9090
+
+grafana:
+	$(KC) create namespace grafana
+	$(HM) install grafana grafana/grafana \
+		--namespace grafana \
+		--set persistence.storageClassName="gp2" \
+		--set persistence.enabled=true \
+		--set adminPassword='srumbledore' \
+		--values cluster/grafana.yaml \
+		--set service.type=LoadBalancer
+	$(KC) apply -n grafana -f cluster/grafana-flask-configmap.yaml
+
+grafana-url:
+	export ELB=$(kubectl get svc -n grafana grafana -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+	echo "http://$ELB"
