@@ -111,7 +111,7 @@ rollout-booking:
 	cd booking-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/booking-service
 
-provision: prom grafana
+provision: prom-update prom grafana
 
 prom:
 	$(KC) apply -f monitoring/prom.yaml
@@ -125,3 +125,6 @@ grafana:
 
 grafana-port-forward:
 	$(KC) port-forward svc/grafana -n $(ISTIO_NS) 3000
+
+prom-update:
+	sed -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/prom-tpl.yaml > monitoring/prom.yaml

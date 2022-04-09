@@ -11,9 +11,9 @@ make -f k8s.mak deployservice
 ```
 Use `kubectl get svc --all-namespaces` to get the IP for the services.
 
-To deploy prometheus and grafana
+To deploy prometheus and grafana. In the command below replace the variable names with appropriate external IPs.
 ```
-make -f k8s.mak provision
+make -f k8s.mak provision MENU='aaa' BILL='bbb' BOOK='ccc' 
 ```
 
 After using the EKS cluster ensure to stop the cluster, in order to prevent absurd charges
