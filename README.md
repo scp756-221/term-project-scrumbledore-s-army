@@ -16,6 +16,10 @@ To deploy prometheus and grafana. In the command below replace the variable name
 make -f k8s.mak provision MENU='aaa' BILL='bbb' BOOK='ccc' 
 ```
 
+To view Grafana dashboard, enter the below command and visit localhost:3000
+```
+make -f k8s.mak grafana-port-forward
+```
 After using the EKS cluster ensure to stop the cluster, in order to prevent absurd charges
 ```
 make -f k8s.mak stop
