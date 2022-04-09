@@ -111,7 +111,7 @@ rollout-booking:
 	cd booking-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/booking-service
 
-provision: prom-update prom grafana
+provision: prom-update prom grafana-update grafana
 
 prom:
 	$(KC) apply -f monitoring/prom.yaml
@@ -120,7 +120,6 @@ prom-port-forward:
 	$(KC) port-forward svc/prometheus -n $(ISTIO_NS) 9090
 
 grafana:
-	$(KC) apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/grafana.yaml
 	$(KC) apply -f monitoring/grafana.yaml
 
 grafana-port-forward:
@@ -128,3 +127,7 @@ grafana-port-forward:
 
 prom-update:
 	sed -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/prom-tpl.yaml > monitoring/prom.yaml
+
+grafana-update:
+	sed -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/grafana-tpl.yaml > monitoring/grafana.yaml
+	sed -i -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/grafana.yaml
