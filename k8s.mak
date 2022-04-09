@@ -26,7 +26,7 @@ LOG_DIR=logs
 NS=rsns
 CLUSTER_NAME=awsrservice
 EKS_CTX=awsrservice
-
+ISTIO_NS=prom-grafana
 
 NGROUP=worker-nodes
 NTYPE=t3.medium
@@ -115,8 +115,14 @@ provision: helm prom grafana
 
 helm:
 	$(HM) repo add prometheus-community https://prometheus-community.github.io/helm-charts
-	$(HM) repo add grafana https://grafana.github.io/helm-charts
 	$(HM) repo update
+
+install-prom:
+	$(KC) create namespace $(ISTIO_NS)
+	echo $(HM) install prometheus --namespace $(ISTIO_NS) prometheus-community/kube-prometheus-stack 
+	$(HM) install prometheus -f monitoring/helm.yaml --namespace $(ISTIO_NS) prometheus-community/kube-prometheus-stack
+	$(KC) apply -n $(ISTIO_NS) -f monitoring/monitoring-services.yaml 
+	$(KC) apply -n $(ISTIO_NS) -f monitoring/grafana-flask-configmap.yaml
 
 prom:
 	$(KC) create namespace prometheus
@@ -124,7 +130,6 @@ prom:
 		--namespace prometheus \
 		--set alertmanager.persistentVolume.storageClass="gp2" \
 		--set server.persistentVolume.storageClass="gp2"
-	$(KC) port-forward -n prometheus deploy/prometheus-server 8080:9090
 
 grafana:
 	$(KC) create namespace grafana
@@ -135,7 +140,6 @@ grafana:
 		--set adminPassword='srumbledore' \
 		--values cluster/grafana.yaml \
 		--set service.type=LoadBalancer
-	$(KC) apply -n grafana -f cluster/grafana-flask-configmap.yaml
 
 grafana-url:
 	export ELB=$(kubectl get svc -n grafana grafana -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
