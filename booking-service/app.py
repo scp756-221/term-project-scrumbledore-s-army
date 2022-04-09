@@ -1,12 +1,14 @@
 import argparse
 from urllib import response
 
-from flask import Flask, make_response, request
-from sqlalchemy import true
-
 import db.dynamodb_handler as dynamodb
+from flask import Flask, make_response, request
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+metrics.info('app_info', 'Booking Service')
 
 
 def parse_args():
@@ -53,4 +55,4 @@ def get_booking():
 
 if __name__ == '__main__':
     args = parse_args()
-    app.run(host='0.0.0.0', port=args.port_book, debug=True)
+    app.run(host='0.0.0.0', port=args.port_book)

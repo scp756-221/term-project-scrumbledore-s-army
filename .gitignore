@@ -5,3 +5,5 @@
 ./idea/*
 **/.env
 .idea/*
+monitoring/grafana.yaml
+monitoring/prom.yaml
