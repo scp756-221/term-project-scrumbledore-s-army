@@ -26,7 +26,7 @@ LOG_DIR=logs
 NS=rsns
 CLUSTER_NAME=awsrservice
 EKS_CTX=awsrservice
-ISTIO_NS=prom-grafana
+ISTIO_NS=istio-system
 
 NGROUP=worker-nodes
 NTYPE=t3.medium
@@ -82,7 +82,7 @@ setnamespace:
 setistio:
 	$(KC) config use-context $(EKS_CTX)
 	$(IC) install -y --set profile=demo --set hub=gcr.io/istio-release
-	$(KC) label namespace $(NS) istio-injection=enabled
+	$(KC) label namespace default istio-injection=enabled
 
 publishimage:
 	cd menu-service && make publish-image
@@ -111,36 +111,17 @@ rollout-booking:
 	cd booking-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/booking-service
 
-provision: helm prom grafana
-
-helm:
-	$(HM) repo add prometheus-community https://prometheus-community.github.io/helm-charts
-	$(HM) repo update
-
-install-prom:
-	$(KC) create namespace $(ISTIO_NS)
-	echo $(HM) install prometheus --namespace $(ISTIO_NS) prometheus-community/kube-prometheus-stack 
-	$(HM) install prometheus -f monitoring/helm.yaml --namespace $(ISTIO_NS) prometheus-community/kube-prometheus-stack
-	$(KC) apply -n $(ISTIO_NS) -f monitoring/monitoring-services.yaml 
-	$(KC) apply -n $(ISTIO_NS) -f monitoring/grafana-flask-configmap.yaml
+provision: prom grafana
 
 prom:
-	$(KC) create namespace prometheus
-	$(HM) install prometheus prometheus-community/prometheus \
-		--namespace prometheus \
-		--set alertmanager.persistentVolume.storageClass="gp2" \
-		--set server.persistentVolume.storageClass="gp2"
+	$(KC) apply -f monitoring/prom.yaml
+
+prom-port-forward:
+	$(KC) port-forward svc/prometheus -n $(ISTIO_NS) 9090
 
 grafana:
-	$(KC) create namespace grafana
-	$(HM) install grafana grafana/grafana \
-		--namespace grafana \
-		--set persistence.storageClassName="gp2" \
-		--set persistence.enabled=true \
-		--set adminPassword='srumbledore' \
-		--values cluster/grafana.yaml \
-		--set service.type=LoadBalancer
+	$(KC) apply -f https://raw.githubusercontent.com/istio/istio/release-1.13/samples/addons/grafana.yaml
+	$(KC) apply -f monitoring/grafana.yaml
 
-grafana-url:
-	export ELB=$(kubectl get svc -n grafana grafana -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-	echo "http://$ELB"
+grafana-port-forward:
+	$(KC) port-forward svc/grafana -n $(ISTIO_NS) 3000
