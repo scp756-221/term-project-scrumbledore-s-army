@@ -1,0 +1,4 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649201572913	test	3.6.1
+USER	take order	START	1649201574029
+REQUEST		take order	1649201574040	1649201634046	KO	i.g.h.c.i.RequestTimeoutException: Request timeout to 127.0.0.1/127.0.0.1:5000 after 60000 ms
+USER	take order	END	1649201634078

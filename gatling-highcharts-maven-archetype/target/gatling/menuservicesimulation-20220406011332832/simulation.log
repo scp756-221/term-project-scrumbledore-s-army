@@ -1,0 +1,5 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649207612832	test	3.6.1
+USER	get menu	START	1649207613744
+REQUEST		get menu details	1649207613754	1649207613970	OK	 
+REQUEST		take order	1649207615986	1649207676010	KO	i.g.h.c.i.RequestTimeoutException: Request timeout to 127.0.0.1/127.0.0.1:5000 after 60000 ms
+USER	get menu	END	1649207676041

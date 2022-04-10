@@ -1,0 +1,7 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649188322016	menu items test	3.6.1
+USER	get menu	START	1649188323161
+USER	get menu	START	1649188323161
+REQUEST		get menu details	1649188323172	1649188323374	OK	 
+REQUEST		get menu details	1649188323172	1649188323370	OK	 
+USER	get menu	END	1649188323384
+USER	get menu	END	1649188323384

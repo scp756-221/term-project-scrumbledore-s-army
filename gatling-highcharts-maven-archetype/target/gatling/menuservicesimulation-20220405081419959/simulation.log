@@ -1,0 +1,7 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649146459959	menu test	3.6.1
+ERROR	get menu details: Failed to build request: url  can't be parsed into an Uri: j.l.IllegalArgumentException:  could not be parsed into a proper Uri, missing scheme 	1649146461095
+ERROR	get menu details: Failed to build request: url  can't be parsed into an Uri: j.l.IllegalArgumentException:  could not be parsed into a proper Uri, missing scheme 	1649146461095
+USER	get menu	START	1649146461082
+USER	get menu	START	1649146461082
+USER	get menu	END	1649146461097
+USER	get menu	END	1649146461097

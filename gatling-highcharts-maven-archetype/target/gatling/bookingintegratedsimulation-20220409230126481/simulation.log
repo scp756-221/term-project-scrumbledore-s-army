@@ -1,0 +1,9 @@
+RUN	simulations.BookingIntegratedSimulation	bookingintegratedsimulation	1649545286481	t	3.6.1
+USER	full cycle with booking	START	1649545287543
+REQUEST		make booking	1649545287555	1649545287897	KO	status.find.is(422), but actually found 200
+REQUEST		get booking	1649545289923	1649545289967	OK	 
+REQUEST		get menu details	1649545289970	1649545290147	OK	 
+REQUEST		take order	1649545291165	1649545291232	KO	status.find.is(500), but actually found 200
+REQUEST		get bill	1649545292237	1649545292615	OK	 
+REQUEST		pay bill	1649545293621	1649545293742	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545293750

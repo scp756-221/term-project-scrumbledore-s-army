@@ -1,0 +1,9 @@
+RUN	simulations.IntegratedSimulation	integratedsimulation	1649494023875	t	3.6.1
+USER	full cycle without booking	START	1649494024744
+USER	full cycle without booking	START	1649494024744
+REQUEST		get menu details	1649494024754	1649494025011	OK	 
+REQUEST		get menu details	1649494024754	1649494025013	OK	 
+REQUEST		take order	1649494026043	1649494026096	KO	status.find.is(200), but actually found 500
+REQUEST		take order	1649494026043	1649494026096	KO	status.find.is(200), but actually found 500
+USER	full cycle without booking	END	1649494026104
+USER	full cycle without booking	END	1649494026104

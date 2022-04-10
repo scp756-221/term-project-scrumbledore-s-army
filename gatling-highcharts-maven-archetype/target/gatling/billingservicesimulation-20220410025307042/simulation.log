@@ -1,0 +1,5 @@
+RUN	simulations.BillingServiceSimulation	billingservicesimulation	1649559187042	t	3.6.1
+USER	bill payment	START	1649559187937
+REQUEST		get bill	1649559187958	1649559188073	OK	 
+REQUEST		pay bill	1649559189084	1649559189164	KO	status.find.is(200), but actually found 500
+USER	bill payment	END	1649559189183

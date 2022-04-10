@@ -1,0 +1,7 @@
+RUN	simulations.IntegratedSimulation	integratedsimulation	1649482358884	test	3.6.1
+USER	full cycle without booking	START	1649482359784
+REQUEST		get menu details	1649482359792	1649482359880	KO	status.find.is(200), but actually found 404
+REQUEST		take order	1649482360911	1649482360923	KO	status.find.is(200), but actually found 404
+REQUEST		get bill	1649482361937	1649482362200	OK	 
+REQUEST		pay bill	1649482363209	1649482363343	KO	status.find.is(200), but actually found 409
+USER	full cycle without booking	END	1649482363348

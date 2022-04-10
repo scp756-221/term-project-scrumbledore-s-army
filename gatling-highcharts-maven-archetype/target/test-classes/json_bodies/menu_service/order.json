@@ -1,0 +1,17 @@
+{
+  "user_id": "1",
+  "order_list": [
+    {
+        "id": 1,
+        "name": "Test1",
+        "price": 12.0,
+        "qty": 1
+    },
+    {
+        "id": 2,
+        "name": "Test2",
+        "price": 2.0,
+        "qty": 5
+    }],
+  "has_booked": "False"
+}

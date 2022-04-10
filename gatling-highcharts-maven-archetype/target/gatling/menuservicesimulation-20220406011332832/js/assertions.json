@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.MenuServiceSimulation",
+  "simulationId": "menuservicesimulation",
+  "start": 1649207612832,
+  "description": "test",
+  "scenarios": ["get menu"],
+  "assertions": [
+
+  ]
+}

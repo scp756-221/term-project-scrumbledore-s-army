@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.BillingServiceSimulation",
+  "simulationId": "billingservicesimulation",
+  "start": 1649270698940,
+  "description": "test",
+  "scenarios": ["get bill"],
+  "assertions": [
+
+  ]
+}

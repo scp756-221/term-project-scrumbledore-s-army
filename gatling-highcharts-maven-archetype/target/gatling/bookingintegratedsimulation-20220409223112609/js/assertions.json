@@ -1,0 +1,10 @@
+{
+  "simulation": "simulations.BookingIntegratedSimulation",
+  "simulationId": "bookingintegratedsimulation",
+  "start": 1649543472609,
+  "description": "test",
+  "scenarios": ["full cycle with booking"],
+  "assertions": [
+
+  ]
+}

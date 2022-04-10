@@ -1,0 +1,4 @@
+RUN	simulations.BillingServiceSimulation	billingservicesimulation	1649208371774	test	3.6.1
+USER	get bill	START	1649208372610
+REQUEST		get bill	1649208372631	1649208372843	OK	 
+USER	get bill	END	1649208372856

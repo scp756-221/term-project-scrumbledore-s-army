@@ -1,0 +1,9 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649561230069	t	3.6.1
+USER	get menu	START	1649561231190
+USER	get menu	START	1649561231190
+REQUEST		get menu details	1649561231200	1649561231205	KO	j.n.ConnectException: Connection refused
+REQUEST		get menu details	1649561231200	1649561231205	KO	j.n.ConnectException: Connection refused
+REQUEST		take order	1649561233223	1649561233226	KO	j.n.ConnectException: Connection refused
+REQUEST		take order	1649561233223	1649561233227	KO	j.n.ConnectException: Connection refused
+USER	get menu	END	1649561233230
+USER	get menu	END	1649561233230
