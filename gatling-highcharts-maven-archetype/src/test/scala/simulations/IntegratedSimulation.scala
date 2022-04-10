@@ -45,5 +45,5 @@ class IntegratedSimulation extends Simulation {
       .queryParam("user_id", "${ID}")
       .check(status in (200, 422, 409)))
 
-  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(5))).protocols(menuServiceConf)
+  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(500))).protocols(menuServiceConf)
 }

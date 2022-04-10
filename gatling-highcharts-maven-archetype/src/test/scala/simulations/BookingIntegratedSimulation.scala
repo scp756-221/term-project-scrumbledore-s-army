@@ -18,16 +18,18 @@ class BookingIntegratedSimulation extends Simulation {
 
   val fullCycleWoBookingScenario = scenario(scenarioName = "full cycle with booking")
 
+    .feed(feeder)
+
     .exec(http(requestName = "make booking")
       .get(s"${URLConstants.booking_service}book")
-      .queryParam("booking_id", "${number}")
+      .queryParam("booking_id", "${Number}")
       .check(status in (200, 422)))
 
-    .pause(duration = 2)
+    .pause(duration = 1)
 
     .exec(http("get booking")
       .get(s"${URLConstants.booking_service}get_booking")
-      .queryParam("booking_id", "${number}")
+      .queryParam("booking_id", "${Number}")
       .check(status is 200))
 
     .exec(http(requestName = "get menu details")
@@ -36,12 +38,10 @@ class BookingIntegratedSimulation extends Simulation {
 
     .pause(duration = 1)
 
-    .feed(feeder)
-
     .exec(http(requestName = "take order")
       .post("takeOrder")
       .body(StringBody("\"{\\n    \\\"user_id\\\": \\\"${ID}\\\",\\n    \\\"order_list\\\": [\\n        {\\n            \\\"id\\\": 1,\\n            \\\"qty\\\": 2\\n        },\\n        {\\n            \\\"id\\\": 2,\\n            \\\"qty\\\": 5\\n        }\\n    ],\\n    \\\"has_booked\\\": true\\n}\""))
-      .check(status in (200, 500)))
+      .check(status in (200)))
 
     .pause(duration = 1)
 
@@ -55,8 +55,8 @@ class BookingIntegratedSimulation extends Simulation {
     .exec(http("pay bill")
       .get(s"${URLConstants.billing_service}pay")
       .queryParam("user_id", "${ID}")
-      .queryParam("booking_id", "2234567890")
+      .queryParam("booking_id", "${Number}")
       .check(status in (200, 422, 409)))
 
-  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(5))).protocols(menuServiceConf)
+  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(1))).protocols(menuServiceConf)
 }
