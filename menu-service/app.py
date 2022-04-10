@@ -1,11 +1,14 @@
 import argparse
 import json
 
-from flask import Flask, jsonify, make_response, request
-
 import db.dynamodb_handler as dynamodb
+from flask import Flask, jsonify, make_response, request
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+metrics = PrometheusMetrics(app)
+
+metrics.info('app_info', 'Menu Service')
 
 
 def parse_args():
@@ -74,4 +77,4 @@ def create_error(code=422):
 
 if __name__ == '__main__':
     args = parse_args()
-    app.run(host='0.0.0.0', port=args.port_menu, debug=True)
+    app.run(host='0.0.0.0', port=args.port_menu)

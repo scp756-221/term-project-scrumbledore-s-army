@@ -7,3 +7,5 @@
 .idea/*
 **/.idea
 /gatling-highcharts-maven-archetype/target/gatling/*
+monitoring/grafana.yaml
+monitoring/prom.yaml

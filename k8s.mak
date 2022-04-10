@@ -17,6 +17,7 @@
 EKS=eksctl
 KC=kubectl
 IC=istioctl
+HM=helm
 
 # Keep all the logs out of main directory
 LOG_DIR=logs
@@ -25,7 +26,7 @@ LOG_DIR=logs
 NS=rsns
 CLUSTER_NAME=awsrservice
 EKS_CTX=awsrservice
-
+ISTIO_NS=istio-system
 
 NGROUP=worker-nodes
 NTYPE=t3.medium
@@ -81,7 +82,7 @@ setnamespace:
 setistio:
 	$(KC) config use-context $(EKS_CTX)
 	$(IC) install -y --set profile=demo --set hub=gcr.io/istio-release
-	$(KC) label namespace $(NS) istio-injection=enabled
+	$(KC) label namespace default istio-injection=enabled
 
 publishimage:
 	cd menu-service && make publish-image
@@ -109,3 +110,24 @@ rollout-booking:
 	cd booking-service && make publish-image
 	cd booking-service && $(KC) apply -f deployment.yaml 
 	$(KC) rollout -n $(NS) restart deployment/booking-service
+
+provision: prom-update prom grafana-update grafana
+
+prom:
+	$(KC) apply -f monitoring/prom.yaml
+
+prom-port-forward:
+	$(KC) port-forward svc/prometheus -n $(ISTIO_NS) 9090
+
+grafana:
+	$(KC) apply -f monitoring/grafana.yaml
+
+grafana-port-forward:
+	$(KC) port-forward svc/grafana -n $(ISTIO_NS) 3000
+
+prom-update:
+	sed -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/prom-tpl.yaml > monitoring/prom.yaml
+
+grafana-update:
+	sed -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/grafana-tpl.yaml > monitoring/grafana.yaml
+	sed -i -e "s/{{MENU_IP}}/$(MENU)/" -e "s/{{BILLING_IP}}/$(BILL)/" -e "s/{{BOOKING_IP}}/$(BOOK)/" monitoring/grafana.yaml
