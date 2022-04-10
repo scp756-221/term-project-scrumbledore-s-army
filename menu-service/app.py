@@ -48,23 +48,11 @@ def place_order(order_list, user_id):
 
 @app.route('/getMenuItems')
 def get_all_menu_data():
-    val = random.randint(1, 10)
-    if (val%2 == 0):
-        return create_error(500)
-    val = random.randint(1, 10)
-    if (val%2 == 0):
-        time.sleep(5)
     return dynamodb.get_menu()
 
 
 @app.route('/takeOrder', methods=['POST'])
 def take_order():
-    val = random.randint(1, 10)
-    if (val%2 == 0):
-        return create_error(500)
-    val = random.randint(1, 10)
-    if (val%2 == 0):
-        time.sleep(5)
     order = json.loads(json.loads(request.data))
     user_id = order['user_id']
     order_list = order['order_list']
