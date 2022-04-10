@@ -1,7 +1,5 @@
 import argparse
 import json
-import random
-import time
 
 import db.dynamodb_handler as dynamodb
 from flask import Flask, jsonify, make_response, request
