@@ -82,7 +82,7 @@ setnamespace:
 setistio:
 	$(KC) config use-context $(EKS_CTX)
 	$(IC) install -y --set profile=demo --set hub=gcr.io/istio-release
-	$(KC) label namespace default istio-injection=enabled
+	$(KC) label namespace $(NS) istio-injection=enabled
 
 publishimage:
 	cd menu-service && make publish-image
