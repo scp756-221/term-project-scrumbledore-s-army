@@ -1,0 +1,5 @@
+RUN	simulations.IntegratedSimulation	integratedsimulation	1649560543984	t	3.6.1
+USER	full cycle without booking	START	1649560545118
+REQUEST		get menu details	1649560545127	1649560545440	OK	 
+REQUEST		get menu details	1649560546474	1649560546560	OK	 
+USER	full cycle without booking	END	1649560546563

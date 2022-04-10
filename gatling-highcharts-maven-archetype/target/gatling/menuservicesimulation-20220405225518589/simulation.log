@@ -1,0 +1,4 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649199318589	test	3.6.1
+USER	take order	START	1649199319679
+REQUEST		take order	1649199319688	1649199319752	KO	status.find.is(200), but actually found 500
+USER	take order	END	1649199319781

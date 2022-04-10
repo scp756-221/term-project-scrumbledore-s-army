@@ -1,0 +1,5 @@
+RUN	simulations.BillingServiceSimulation	billingservicesimulation	1649228747651	test	3.6.1
+USER	get bill	START	1649228748785
+REQUEST		get bill	1649228748806	1649228758815	KO	i.n.c.ConnectTimeoutException: connection timed out: /142.58.218.103:50002
+REQUEST		pay bill	1649228761853	1649228771871	KO	i.n.c.ConnectTimeoutException: connection timed out: /142.58.218.103:50002
+USER	get bill	END	1649228771900

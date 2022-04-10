@@ -1,0 +1,401 @@
+RUN	simulations.BookingIntegratedSimulation	bookingintegratedsimulation	1649545061192	test	3.6.1
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062105
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062105
+USER	full cycle with booking	START	1649545062105
+USER	full cycle with booking	START	1649545062105
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062108
+USER	full cycle with booking	START	1649545062107
+USER	full cycle with booking	START	1649545062107
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062106
+USER	full cycle with booking	START	1649545062109
+USER	full cycle with booking	START	1649545062109
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062110
+USER	full cycle with booking	START	1649545062110
+USER	full cycle with booking	START	1649545062108
+USER	full cycle with booking	START	1649545062104
+USER	full cycle with booking	START	1649545062111
+USER	full cycle with booking	START	1649545062081
+USER	full cycle with booking	START	1649545062111
+USER	full cycle with booking	START	1649545062113
+USER	full cycle with booking	START	1649545062111
+USER	full cycle with booking	START	1649545062114
+USER	full cycle with booking	START	1649545062116
+USER	full cycle with booking	START	1649545062117
+USER	full cycle with booking	START	1649545062115
+USER	full cycle with booking	START	1649545062117
+USER	full cycle with booking	START	1649545062118
+REQUEST		make booking	1649545062110	1649545062424	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062459	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062463	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062118	1649545062465	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062465	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062107	1649545062465	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062466	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062466	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062468	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062471	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062113	1649545062472	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062474	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062480	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062482	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062482	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062108	1649545062482	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062483	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062113	1649545062484	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062484	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062484	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062486	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062486	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062111	1649545062486	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062487	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062487	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062108	1649545062487	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062493	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062108	1649545062497	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062115	1649545062498	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062498	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062109	1649545062501	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062109	1649545062504	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062505	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062505	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062110	1649545062510	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062511	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062511	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062107	1649545062512	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062111	1649545062515	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062105	1649545062521	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062527	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062117	1649545062527	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062104	1649545062529	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062118	1649545062531	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062535	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062106	1649545062535	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062116	1649545062534	KO	status.find.is(200), but actually found 422
+REQUEST		make booking	1649545062116	1649545062542	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062546	KO	status.find.is(422), but actually found 200
+REQUEST		make booking	1649545062100	1649545062554	KO	status.find.is(200), but actually found 422
+REQUEST		get booking	1649545064467	1649545064507	OK	 
+REQUEST		get booking	1649545064466	1649545064509	OK	 
+REQUEST		get booking	1649545064447	1649545064510	OK	 
+REQUEST		get booking	1649545064464	1649545064515	OK	 
+REQUEST		get booking	1649545064468	1649545064515	OK	 
+REQUEST		get booking	1649545064466	1649545064515	OK	 
+REQUEST		get booking	1649545064466	1649545064522	OK	 
+REQUEST		get booking	1649545064470	1649545064528	OK	 
+REQUEST		get booking	1649545064469	1649545064538	OK	 
+REQUEST		get booking	1649545064473	1649545064541	OK	 
+REQUEST		get booking	1649545064475	1649545064549	OK	 
+REQUEST		get booking	1649545064478	1649545064567	OK	 
+REQUEST		get booking	1649545064487	1649545064573	OK	 
+REQUEST		get booking	1649545064486	1649545064579	OK	 
+REQUEST		get booking	1649545064483	1649545064587	OK	 
+REQUEST		get booking	1649545064487	1649545064593	OK	 
+REQUEST		get booking	1649545064488	1649545064593	OK	 
+REQUEST		get booking	1649545064487	1649545064598	OK	 
+REQUEST		get booking	1649545064489	1649545064598	OK	 
+REQUEST		get booking	1649545064486	1649545064599	OK	 
+REQUEST		get booking	1649545064489	1649545064601	OK	 
+REQUEST		get booking	1649545064490	1649545064601	OK	 
+REQUEST		get booking	1649545064489	1649545064609	OK	 
+REQUEST		get booking	1649545064491	1649545064616	OK	 
+REQUEST		get booking	1649545064500	1649545064619	OK	 
+REQUEST		get booking	1649545064499	1649545064628	OK	 
+REQUEST		get booking	1649545064500	1649545064634	OK	 
+REQUEST		get booking	1649545064494	1649545064634	OK	 
+REQUEST		get booking	1649545064507	1649545064650	OK	 
+REQUEST		get booking	1649545064507	1649545064663	OK	 
+REQUEST		get booking	1649545064512	1649545064669	OK	 
+REQUEST		get booking	1649545064503	1649545064676	OK	 
+REQUEST		get booking	1649545064513	1649545064678	OK	 
+REQUEST		get booking	1649545064515	1649545064680	OK	 
+REQUEST		get booking	1649545064512	1649545064682	OK	 
+REQUEST		get booking	1649545064514	1649545064684	OK	 
+REQUEST		get booking	1649545064534	1649545064686	OK	 
+REQUEST		get menu details	1649545064509	1649545064687	OK	 
+REQUEST		get booking	1649545064517	1649545064690	OK	 
+REQUEST		get booking	1649545064525	1649545064692	OK	 
+REQUEST		get booking	1649545064536	1649545064697	OK	 
+REQUEST		get booking	1649545064535	1649545064703	OK	 
+REQUEST		get booking	1649545064488	1649545064704	OK	 
+REQUEST		get booking	1649545064491	1649545064706	OK	 
+REQUEST		get menu details	1649545064528	1649545064708	OK	 
+REQUEST		get menu details	1649545064508	1649545064710	OK	 
+REQUEST		get booking	1649545064537	1649545064713	OK	 
+REQUEST		get menu details	1649545064541	1649545064714	OK	 
+REQUEST		get menu details	1649545064515	1649545064714	OK	 
+REQUEST		get menu details	1649545064515	1649545064715	OK	 
+REQUEST		get booking	1649545064537	1649545064716	OK	 
+REQUEST		get booking	1649545064544	1649545064720	OK	 
+REQUEST		get booking	1649545064548	1649545064723	OK	 
+REQUEST		get menu details	1649545064568	1649545064725	OK	 
+REQUEST		get booking	1649545064556	1649545064726	OK	 
+REQUEST		get menu details	1649545064522	1649545064727	OK	 
+REQUEST		get menu details	1649545064549	1649545064727	OK	 
+REQUEST		get menu details	1649545064538	1649545064727	OK	 
+REQUEST		get menu details	1649545064515	1649545064737	OK	 
+REQUEST		get menu details	1649545064593	1649545064741	OK	 
+REQUEST		get menu details	1649545064574	1649545064742	OK	 
+REQUEST		get menu details	1649545064628	1649545064744	OK	 
+REQUEST		get menu details	1649545064635	1649545064744	OK	 
+REQUEST		get menu details	1649545064587	1649545064747	OK	 
+REQUEST		get menu details	1649545064511	1649545064748	OK	 
+REQUEST		get menu details	1649545064635	1649545064750	OK	 
+REQUEST		get menu details	1649545064663	1649545064754	OK	 
+REQUEST		get menu details	1649545064650	1649545064759	OK	 
+REQUEST		get menu details	1649545064670	1649545064764	OK	 
+REQUEST		get menu details	1649545064676	1649545064765	OK	 
+REQUEST		get booking	1649545064529	1649545064769	OK	 
+REQUEST		get menu details	1649545064679	1649545064770	OK	 
+REQUEST		get menu details	1649545064680	1649545064775	OK	 
+REQUEST		get menu details	1649545064616	1649545064777	OK	 
+REQUEST		get menu details	1649545064593	1649545064781	OK	 
+REQUEST		get booking	1649545064529	1649545064782	OK	 
+REQUEST		get menu details	1649545064598	1649545064794	OK	 
+REQUEST		get menu details	1649545064692	1649545064794	OK	 
+REQUEST		get menu details	1649545064682	1649545064796	OK	 
+REQUEST		get menu details	1649545064600	1649545064797	OK	 
+REQUEST		get menu details	1649545064685	1649545064800	OK	 
+REQUEST		get menu details	1649545064579	1649545064800	OK	 
+REQUEST		get menu details	1649545064706	1649545064802	OK	 
+REQUEST		get menu details	1649545064698	1649545064803	OK	 
+REQUEST		get menu details	1649545064716	1649545064804	OK	 
+REQUEST		get menu details	1649545064598	1649545064805	OK	 
+REQUEST		get menu details	1649545064713	1649545064805	OK	 
+REQUEST		get menu details	1649545064690	1649545064805	OK	 
+REQUEST		get menu details	1649545064704	1649545064806	OK	 
+REQUEST		get menu details	1649545064720	1649545064809	OK	 
+REQUEST		get menu details	1649545064601	1649545064809	OK	 
+REQUEST		get menu details	1649545064704	1649545064812	OK	 
+REQUEST		get menu details	1649545064686	1649545064812	OK	 
+REQUEST		get menu details	1649545064619	1649545064817	OK	 
+REQUEST		get menu details	1649545064601	1649545064819	OK	 
+REQUEST		get menu details	1649545064783	1649545064820	OK	 
+REQUEST		get menu details	1649545064609	1649545064821	OK	 
+REQUEST		get menu details	1649545064770	1649545064823	OK	 
+REQUEST		get menu details	1649545064726	1649545064888	OK	 
+REQUEST		get menu details	1649545064723	1649545064899	OK	 
+REQUEST		take order	1649545065716	1649545065779	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065716	1649545065780	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065715	1649545065783	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065714	1649545065791	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065702	1649545065799	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065716	1649545065803	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065728	1649545065805	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065729	1649545065812	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065733	1649545065817	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065748	1649545065819	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065727	1649545065828	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065749	1649545065846	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065750	1649545065857	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065750	1649545065860	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065754	1649545065870	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065779	1649545065885	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065761	1649545065887	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065772	1649545065886	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065770	1649545065891	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065766	1649545065893	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065804	1649545065904	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065757	1649545065908	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065741	1649545065910	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065798	1649545065913	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065804	1649545065914	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065806	1649545065931	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065805	1649545065934	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065806	1649545065937	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065810	1649545065945	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065743	1649545065945	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065806	1649545065956	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065811	1649545065961	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065748	1649545065961	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065811	1649545065963	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065798	1649545065974	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065813	1649545065977	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065819	1649545065983	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065776	1649545065983	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065813	1649545065984	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065796	1649545065999	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065797	1649545066000	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065821	1649545066000	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065783	1649545066001	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065801	1649545066005	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065825	1649545066007	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065825	1649545066013	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065890	1649545066014	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065824	1649545066016	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065900	1649545066021	KO	status.find.is(500), but actually found 200
+REQUEST		take order	1649545065804	1649545066024	KO	status.find.is(500), but actually found 200
+REQUEST		get bill	1649545066782	1649545066947	OK	 
+REQUEST		get bill	1649545066785	1649545066954	OK	 
+REQUEST		get bill	1649545066797	1649545066965	OK	 
+REQUEST		get bill	1649545066784	1649545066969	OK	 
+REQUEST		get bill	1649545066805	1649545066980	OK	 
+REQUEST		get bill	1649545066916	1649545066997	OK	 
+REQUEST		get bill	1649545066816	1649545067005	OK	 
+REQUEST		get bill	1649545066830	1649545067006	OK	 
+REQUEST		get bill	1649545066933	1649545067011	OK	 
+REQUEST		get bill	1649545066863	1649545067014	OK	 
+REQUEST		get bill	1649545066810	1649545067017	OK	 
+REQUEST		get bill	1649545066936	1649545067018	OK	 
+REQUEST		get bill	1649545066914	1649545067027	OK	 
+REQUEST		get bill	1649545066852	1649545067028	OK	 
+REQUEST		get bill	1649545066824	1649545067029	OK	 
+REQUEST		get bill	1649545066805	1649545067030	OK	 
+REQUEST		get bill	1649545066819	1649545067035	OK	 
+REQUEST		get bill	1649545066940	1649545067039	OK	 
+REQUEST		get bill	1649545066862	1649545067042	OK	 
+REQUEST		get bill	1649545066963	1649545067043	OK	 
+REQUEST		get bill	1649545066894	1649545067044	OK	 
+REQUEST		get bill	1649545066911	1649545067048	OK	 
+REQUEST		get bill	1649545066897	1649545067052	OK	 
+REQUEST		get bill	1649545066963	1649545067055	OK	 
+REQUEST		get bill	1649545066888	1649545067056	OK	 
+REQUEST		get bill	1649545066872	1649545067057	OK	 
+REQUEST		get bill	1649545066965	1649545067061	OK	 
+REQUEST		get bill	1649545066886	1649545067061	OK	 
+REQUEST		get bill	1649545066905	1649545067064	OK	 
+REQUEST		get bill	1649545066889	1649545067069	OK	 
+REQUEST		get bill	1649545066978	1649545067071	OK	 
+REQUEST		get bill	1649545066976	1649545067071	OK	 
+REQUEST		get bill	1649545066984	1649545067071	OK	 
+REQUEST		get bill	1649545066984	1649545067073	OK	 
+REQUEST		get bill	1649545066985	1649545067075	OK	 
+REQUEST		get bill	1649545067001	1649545067078	OK	 
+REQUEST		get bill	1649545067000	1649545067081	OK	 
+REQUEST		get bill	1649545067002	1649545067081	OK	 
+REQUEST		get bill	1649545066947	1649545067094	OK	 
+REQUEST		get bill	1649545067001	1649545067096	OK	 
+REQUEST		get bill	1649545067006	1649545067097	OK	 
+REQUEST		get bill	1649545066961	1649545067098	OK	 
+REQUEST		get bill	1649545066948	1649545067098	OK	 
+REQUEST		get bill	1649545066911	1649545067103	OK	 
+REQUEST		get bill	1649545067009	1649545067105	OK	 
+REQUEST		get bill	1649545067014	1649545067105	OK	 
+REQUEST		get bill	1649545067019	1649545067109	OK	 
+REQUEST		get bill	1649545067023	1649545067109	OK	 
+REQUEST		get bill	1649545067016	1649545067111	OK	 
+REQUEST		get bill	1649545067026	1649545067114	OK	 
+REQUEST		pay bill	1649545067971	1649545068105	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068110
+REQUEST		pay bill	1649545067982	1649545068125	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068127
+REQUEST		pay bill	1649545067954	1649545068163	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068164
+REQUEST		pay bill	1649545067959	1649545068168	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068168
+REQUEST		pay bill	1649545067971	1649545068201	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068201
+REQUEST		pay bill	1649545068010	1649545068235	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068236
+REQUEST		pay bill	1649545068000	1649545068247	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068247
+REQUEST		pay bill	1649545068019	1649545068288	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068288
+REQUEST		pay bill	1649545068010	1649545068292	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068293
+REQUEST		pay bill	1649545068020	1649545068353	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068354
+REQUEST		pay bill	1649545068019	1649545068358	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068359
+REQUEST		pay bill	1649545068030	1649545068381	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068381
+REQUEST		pay bill	1649545068017	1649545068410	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068411
+REQUEST		pay bill	1649545068042	1649545068443	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068444
+REQUEST		pay bill	1649545068031	1649545068446	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068452
+REQUEST		pay bill	1649545068030	1649545068453	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068454
+REQUEST		pay bill	1649545068032	1649545068519	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068520
+REQUEST		pay bill	1649545068043	1649545068611	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068612
+REQUEST		pay bill	1649545068049	1649545068631	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068632
+REQUEST		pay bill	1649545068059	1649545068659	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068659
+REQUEST		pay bill	1649545068038	1649545068691	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068691
+REQUEST		pay bill	1649545068057	1649545068700	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068701
+REQUEST		pay bill	1649545068065	1649545068703	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068703
+REQUEST		pay bill	1649545068056	1649545068758	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068759
+REQUEST		pay bill	1649545068044	1649545068880	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068881
+REQUEST		pay bill	1649545068056	1649545068890	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068891
+REQUEST		pay bill	1649545068064	1649545068897	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068897
+REQUEST		pay bill	1649545068071	1649545068899	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068900
+REQUEST		pay bill	1649545068046	1649545068905	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068906
+REQUEST		pay bill	1649545068074	1649545068910	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068910
+REQUEST		pay bill	1649545068073	1649545068916	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068917
+REQUEST		pay bill	1649545068073	1649545068923	KO	status.find.is(200), but actually found 500
+REQUEST		pay bill	1649545068071	1649545068923	KO	status.find.is(200), but actually found 500
+REQUEST		pay bill	1649545068064	1649545068923	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068924
+USER	full cycle with booking	END	1649545068924
+USER	full cycle with booking	END	1649545068924
+REQUEST		pay bill	1649545068075	1649545068944	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068944
+REQUEST		pay bill	1649545068095	1649545068957	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068958
+REQUEST		pay bill	1649545068110	1649545068985	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545068986
+REQUEST		pay bill	1649545068081	1649545069002	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069003
+REQUEST		pay bill	1649545068098	1649545069011	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069012
+REQUEST		pay bill	1649545068098	1649545069021	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069021
+REQUEST		pay bill	1649545068113	1649545069025	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069025
+REQUEST		pay bill	1649545068106	1649545069032	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069033
+REQUEST		pay bill	1649545068113	1649545069035	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069036
+REQUEST		pay bill	1649545068109	1649545069047	KO	status.find.is(200), but actually found 500
+REQUEST		pay bill	1649545068082	1649545069046	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069047
+USER	full cycle with booking	END	1649545069047
+REQUEST		pay bill	1649545068113	1649545069056	KO	status.find.is(200), but actually found 500
+REQUEST		pay bill	1649545068082	1649545069056	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069056
+USER	full cycle with booking	END	1649545069056
+REQUEST		pay bill	1649545068115	1649545069058	KO	status.find.is(200), but actually found 500
+REQUEST		pay bill	1649545068099	1649545069058	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069058
+USER	full cycle with booking	END	1649545069058
+REQUEST		pay bill	1649545068098	1649545069058	KO	status.find.is(200), but actually found 500
+USER	full cycle with booking	END	1649545069059

@@ -1,0 +1,5 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649207694670	test	3.6.1
+USER	get menu	START	1649207695508
+REQUEST		get menu details	1649207695516	1649207695770	OK	 
+REQUEST		take order	1649207697795	1649207705285	KO	status.find.is(200), but actually found 500
+USER	get menu	END	1649207705303

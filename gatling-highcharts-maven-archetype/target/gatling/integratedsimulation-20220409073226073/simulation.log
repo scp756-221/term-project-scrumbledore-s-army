@@ -1,0 +1,31 @@
+RUN	simulations.IntegratedSimulation	integratedsimulation	1649489546073	test	3.6.1
+USER	full cycle without booking	START	1649489547140
+USER	full cycle without booking	START	1649489547140
+USER	full cycle without booking	START	1649489547140
+USER	full cycle without booking	START	1649489547140
+USER	full cycle without booking	START	1649489547140
+REQUEST		get menu details	1649489547151	1649489547397	OK	 
+REQUEST		get menu details	1649489547151	1649489547408	OK	 
+REQUEST		get menu details	1649489547151	1649489547408	OK	 
+REQUEST		get menu details	1649489547151	1649489547411	OK	 
+REQUEST		get menu details	1649489547151	1649489547411	OK	 
+REQUEST		take order	1649489548422	1649489548596	OK	 
+REQUEST		take order	1649489548421	1649489548605	OK	 
+REQUEST		take order	1649489548421	1649489548605	OK	 
+REQUEST		take order	1649489548421	1649489548607	OK	 
+REQUEST		take order	1649489548420	1649489548635	OK	 
+REQUEST		get bill	1649489549612	1649489549794	KO	status.find.is(200), but actually found 422
+REQUEST		get bill	1649489549609	1649489549783	KO	status.find.is(200), but actually found 422
+REQUEST		get bill	1649489549610	1649489549797	KO	status.find.is(200), but actually found 422
+REQUEST		get bill	1649489549610	1649489549806	KO	status.find.is(200), but actually found 422
+REQUEST		get bill	1649489549638	1649489549806	KO	status.find.is(200), but actually found 422
+REQUEST		pay bill	1649489550799	1649489550923	KO	status.find.is(200), but actually found 422
+USER	full cycle without booking	END	1649489550928
+REQUEST		pay bill	1649489550811	1649489550939	KO	status.find.is(200), but actually found 422
+REQUEST		pay bill	1649489550799	1649489550939	KO	status.find.is(200), but actually found 422
+USER	full cycle without booking	END	1649489550940
+USER	full cycle without booking	END	1649489550940
+REQUEST		pay bill	1649489550802	1649489550943	KO	status.find.is(200), but actually found 422
+REQUEST		pay bill	1649489550810	1649489550943	KO	status.find.is(200), but actually found 422
+USER	full cycle without booking	END	1649489550944
+USER	full cycle without booking	END	1649489550944

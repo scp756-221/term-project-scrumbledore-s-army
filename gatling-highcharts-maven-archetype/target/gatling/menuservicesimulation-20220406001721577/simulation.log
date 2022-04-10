@@ -1,0 +1,4 @@
+RUN	simulations.MenuServiceSimulation	menuservicesimulation	1649204241577	test	3.6.1
+USER	take order	START	1649204242428
+REQUEST		take order	1649204242440	1649204262521	OK	 
+USER	take order	END	1649204262545
