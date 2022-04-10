@@ -1,52 +1,292 @@
 {
     "seating": [
-      {
-        "PutRequest": {
-          "Item": {
-            "table_id": {
-              "N": "1"
-            },
-            "available": {
-              "BOOL": true
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1000"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
             }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "table_id": {
-              "N": "2"
-            },
-            "available": {
-              "BOOL": true
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1001"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
             }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "table_id": {
-              "N": "3"
-            },
-            "available": {
-              "BOOL": true
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1002"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
             }
-          }
-        }
-      },
-      {
-        "PutRequest": {
-          "Item": {
-            "table_id": {
-              "N": "4"
-            },
-            "available": {
-              "BOOL": true
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1003"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
             }
-          }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1004"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1005"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1006"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1007"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1008"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1009"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1010"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1011"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1012"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1013"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1014"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1015"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1016"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1017"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1018"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1019"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1020"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1021"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1022"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "table_id": {
+                        "N": "1023"
+                    },
+                    "available": {
+                        "BOOL": true
+                    }
+                }
+            }
         }
-      }
     ]
-  }
+}

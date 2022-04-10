@@ -1,0 +1,16 @@
+{
+    "seating": [
+      {
+        "PutRequest": {
+          "Item": {
+            "table_id": {
+              "N": "5"
+            },
+            "available": {
+              "BOOL": true
+            }
+          }
+        }
+      }
+    ]
+  }
