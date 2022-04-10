@@ -1,18 +1,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: menu-service
+  name: billing-service
 spec:
   hosts:
-  - menu-service.rsns.svc.cluster.local
+  - billing-service.rsns.svc.cluster.local
   http:
   - match:
-    - port: 30001
+    - port: 30002
     route:
     - destination:
-        host: menu-service.rsns.svc.cluster.local
+        host: billing-service.rsns.svc.cluster.local
         port:
-          number: 30001
+          number: 30002
     fault:
       delay:
         percentage:
