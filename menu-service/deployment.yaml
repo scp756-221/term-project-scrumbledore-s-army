@@ -20,7 +20,7 @@ spec:
   selector:
     matchLabels:
       app: menu-service
-  replicas: 4
+  replicas: 1
   template:
     metadata:
       labels:
