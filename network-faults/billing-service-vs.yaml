@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: billing-service
+spec:
+  hosts:
+  - billing-service.rsns.svc.cluster.local
+  http:
+  - match:
+    - port: 30002
+    route:
+    - destination:
+        host: billing-service.rsns.svc.cluster.local
+        port:
+          number: 30002
