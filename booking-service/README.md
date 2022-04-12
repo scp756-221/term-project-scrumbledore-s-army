@@ -1,5 +1,5 @@
-Endpoint - 
-Usage - 
+Endpoint - /book
+Usage - To make a booking for a user
 
-Endpoint - 
-Usage - 
+Endpoint - /get_booking
+Usage - To get the booking for a user
