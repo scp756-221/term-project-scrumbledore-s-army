@@ -63,4 +63,5 @@ class BookingIntegratedSimulation extends Simulation {
     }
 
   setUp(fullCycleWoBookingScenario.inject(atOnceUsers(5))).protocols(menuServiceConf)
+
 }

@@ -67,4 +67,5 @@ class NoBookingIntegratedSimulation extends Simulation {
     }
 
   setUp(fullCycleWoBookingScenario.inject(atOnceUsers(1000), constantUsersPerSec(5).during(20))).protocols(menuServiceConf)
+
 }

@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: menu-service
+spec:
+  hosts:
+  - menu-service.rsns.svc.cluster.local
+  http:
+  - match:
+    - port: 30001
+    route:
+    - destination:
+        host: menu-service.rsns.svc.cluster.local
+        port:
+          number: 30001
+    fault:
+      delay:
+        percentage:
+          value: 50
+        fixedDelay: 5s
+      abort:
+        httpStatus: 500
+        percentage:
+          value: 50
