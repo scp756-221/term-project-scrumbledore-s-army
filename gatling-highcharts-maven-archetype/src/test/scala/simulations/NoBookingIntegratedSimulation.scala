@@ -49,7 +49,7 @@ class NoBookingIntegratedSimulation extends Simulation {
     .exec(http(requestName = "get bill")
       .get(s"${URLConstants.billing_service}bill")
       .queryParam("user_id", "${ID}")
-      .check(status is 200))
+      .check(status in (200, 422)))
 
     .pause(duration = 1)
 
@@ -66,5 +66,6 @@ class NoBookingIntegratedSimulation extends Simulation {
         .check(status in (200, 422, 409)))
     }
 
-  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(1))).protocols(menuServiceConf)
+  setUp(fullCycleWoBookingScenario.inject(atOnceUsers(1000), constantUsersPerSec(5).during(20))).protocols(menuServiceConf)
+
 }
